@@ -1,10 +1,10 @@
 /****************************************************************************************************************************************************
- *  File Name   		: nthnodeinsll.h 
- *	File Location		: C:\Users\AVINASH\Desktop\CC++\algorithms\src\main\sites\geeksforgeeks\linkedlists\page05\nthnodeinsll.h
- *  Created on			: Apr 13, 2014 :: 10:22:13 PM
+ *  File Name   		: deleteanodegivenptrtoit.h 
+ *	File Location		: C:\Users\AVINASH\Desktop\CC++\algorithms\src\main\sites\geeksforgeeks\linkedlists\page05\deleteanodegivenptrtoit.h
+ *  Created on			: Apr 14, 2014 :: 11:06:55 PM
  *  Author				: AVINASH
  *  Testing Status 		: TODO
- *  URL 				: http://www.geeksforgeeks.org/write-a-function-to-get-nth-node-in-a-linked-list/
+ *  URL 				: TODO
 ****************************************************************************************************************************************************/
 
 /****************************************************************************************************************************************************/
@@ -40,6 +40,8 @@ using namespace __gnu_cxx;
 #include <stack>
 #include <queue>
 #include <limits.h>
+#include <algos/utils/ds/tree/treeds.h>
+#include <algos/utils/common/tree/tree.h>
 
 /****************************************************************************************************************************************************/
 /* 															USER DEFINED CONSTANTS 																    */
@@ -51,63 +53,27 @@ using namespace __gnu_cxx;
 /* 																MAIN CODE START 																    */
 /****************************************************************************************************************************************************/
 
-#ifndef NTHNODEINSLL_H_
-#define NTHNODEINSLL_H_
+#ifndef DELETEANODEGIVENPTRTOIT_H_
+#define DELETEANODEGIVENPTRTOIT_H_
 
 /****************************************************************************************************************************************************/
 /* 																	O(N) Algorithm 																    */
 /****************************************************************************************************************************************************/
 
-//Tested
-sillNode *getNthNodeFromSll(sillNode *ptr,unsigned int nthValue){
-	if(ptr == null || nthValue == 0){
-		return null;
+void deleteANodeGivenPtr(sillNode *ptr){
+	if(ptr == null){
+		throw "Given pointer is null";
 	}
-	if(nthValue-1== 0){
-		return ptr;
+	if(ptr->next == null){
+		throw "Cannot delete node which has no neighboring pointer";
 	}
-	return getNthNodeFromSll(ptr->next,nthValue-1);
+	ptr->value = ptr->next->value;
+	sillNode *nodeToBeDeleted = ptr->next;
+	ptr->next = ptr->next->next;
+	free(nodeToBeDeleted);
 }
 
-//Tested
-sillNode *getNthNodeFromSllIterative(sillNode *ptr,unsigned int nthValue){
-	if(ptr == null || nthValue == 0){
-		return null;
-	}
-	if(nthValue == 1){
-		return ptr;
-	}
-	sillNode *traversalNode = ptr;
-	nthValue--;
-	while(traversalNode != null && nthValue--){
-		traversalNode = traversalNode->next;
-	}
-	return traversalNode;
-}
-
-//Tested
-sillNode *getNthNodeForSllAuxspace(sillNode *ptr,unsigned int nthValue){
-	if(ptr == null || nthValue == 0){
-		return null;
-	}
-	if(nthValue == 1){
-		return ptr;
-	}
-	hash_map<unsigned int,sillNode *> indexNodeMap;
-	hash_map<unsigned int,sillNode *>::iterator itToIndexNodeMap;
-	unsigned int index = 0;
-	sillNode *traversalNode = ptr;
-	while(traversalNode != null){
-		indexNodeMap.insert(pair<unsigned int,sillNode *>(++index,traversalNode));
-		traversalNode = traversalNode->next;
-	}
-	if((itToIndexNodeMap = indexNodeMap.find(nthValue))!= indexNodeMap.end()){
-		return itToIndexNodeMap->second;
-	}
-	return null;
-}
-
-#endif /* NTHNODEINSLL_H_ */
+#endif /* DELETEANODEGIVENPTRTOIT_H_ */
 
 /****************************************************************************************************************************************************/
 /* 																MAIN CODE END 																	    */

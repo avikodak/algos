@@ -58,6 +58,16 @@ struct itNode{
 	int value;
 	itNode *left;
 	itNode *right;
+
+	itNode(){
+
+	}
+
+	itNode(int userInput){
+		value = userInput;
+		left = NULL;
+		right = NULL;
+	}
 };
 
 struct itNextRightNode{
@@ -65,6 +75,35 @@ struct itNextRightNode{
 	itNextRightNode *left;
 	itNextRightNode *right;
 	itNextRightNode *nextRight;
+
+	itNextRightNode(){
+
+	}
+
+	itNextRightNode(int userInput){
+		value = userInput;
+		left = null;
+		right = null;
+		nextRight = null;
+	}
+};
+
+struct iftNode{
+	int value;
+	unsigned int frequency;
+	iftNode *left;
+	iftNode *right;
+
+	iftNode(){
+
+	}
+
+	iftNode(int userInput){
+		value = userInput;
+		left = null;
+		right = null;
+		frequency = 1;
+	}
 };
 
 #endif /* TREEDS_H_ */

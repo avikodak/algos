@@ -110,9 +110,42 @@ int *getPairOfNodesForGivenSumONLOGN(vector<int> userInput,int requiredSum){
 	return null;
 }
 
+//Tested
+bool isNodePresentInTree(iftNode *ptr,int value){
+	if(ptr == null){
+		return false;
+	}
+	if(ptr->value == value){
+		return true;
+	}
+	if(ptr->value > value){
+		return isNodePresentInTree(ptr->left,value);
+	}else{
+		return isNodePresentInTree(ptr->right,value);
+	}
+}
+
+//Tested
 int *getPairOfNodesForGivenSumONLOGNBST(vector<int> userInput,int requiredSum){
 	if(userInput.size() == 0){
 		return null;
+	}
+	treeutils *utils = new treeutils();
+	iftNode *rootFBST = utils->getFBSTreeFromVector(userInput);
+	hash_map<int,bool> flags;
+	hash_map<int,bool>::iterator itToFlags;
+	int key;
+	for(unsigned int counter = 0;counter < userInput.size();counter++){
+		if((itToFlags = flags.find(userInput[counter])) == flags.end()){
+			key = requiredSum - userInput[counter];
+			if(isNodePresentInTree(rootFBST,key)){
+				int *requiredPair = (int *)calloc(2,sizeof(int));
+				requiredPair[0] = userInput[counter];
+				requiredPair[1] = key;
+				return requiredPair;
+			}
+			flags.insert(pair<int,bool>(userInput[counter],true));
+		}
 	}
 	return null;
 }
