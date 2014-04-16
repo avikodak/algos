@@ -39,9 +39,12 @@
 #include "main/utils/common/tree/tree.h"
 #include "main/sites/geeksforgeeks/trees/page09/treetraversals.h"
 #include "main/sites/geeksforgeeks/trees/page09/sizeoftree.h"
+#include "main/sites/geeksforgeeks/trees/page09/treeidentical.h"
 #include "main/sites/geeksforgeeks/linkedlists/page05/nthnodeinsll.h"
+#include "main/sites/geeksforgeeks/linkedlists/page05/printmiddlesill.h"
 #include "main/sites/geeksforgeeks/arrays/page09/checkforpairforsum.h"
 #include "main/sites/geeksforgeeks/arrays/page09/majorityelement.h"
+#include "main/sites/geeksforgeeks/arrays/page09/oddnumberoftimes.h"
 #include "main/utils/printingutil.h"
 
 #define PRINT_NEW_LINE printf("\n")
@@ -57,13 +60,13 @@
 
 int main(){
 	printf("------------------------------------------ Test Starting ----------------------------------\n");
-	vector<int> randomVector;
-	int number;
-	for(unsigned int counter = 0;counter < 9;counter++){
-		scanf("%d",&number);
-		randomVector.push_back(number);
-	}
-	printf("%d",majorityElementONLOGNBST(randomVector));
+	vector<int> randomVector = generateIVector(9,0,50);
+	printIVector(randomVector);
+	sillutils *utils = new sillutils();
+	sillNode *head = utils->createSILLFromVector(randomVector);
+	unsigned int middleIndex = 0;
+	printMiddleLinkedListByFindingLength(head,middleIndex);
+
 	printf("\n------------------------------------------- Test End -------------------------------------");
 	return 0;
 }

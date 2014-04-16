@@ -100,7 +100,33 @@ public:
 		printSILL(ptr->next);
 	}
 
-
+	//Tested
+	sillHashmap *getHashmapOfSILL(sillNode *ptr){
+		if(ptr == null){
+			return null;
+		}
+		hash_map<unsigned int,sillNode *> indexNodeMap;
+		hash_map<uint32_t,unsigned int> nodeIndexMap;
+		hash_map<unsigned int,sillNode *>::iterator itToIndexNodeMap;
+		hash_map<uint32_t,unsigned int>::iterator itToNodeIndexMap;
+		sillNode *traversalNode = ptr;
+		unsigned int index = 0;
+		while(traversalNode != null){
+			indexNodeMap.insert(pair<unsigned int,sillNode *>(index,traversalNode));
+			nodeIndexMap.insert(pair<uint32_t,unsigned int>((uint32_t)traversalNode,index++));
+			traversalNode = traversalNode->next;
+		}
+		/*for(itToIndexNodeMap = indexNodeMap.begin();itToIndexNodeMap != indexNodeMap.end();itToIndexNodeMap++){
+			printf("%d - %d\n",itToIndexNodeMap->first,itToIndexNodeMap->second->value);
+		}
+		for(itToNodeIndexMap = nodeIndexMap.begin();itToNodeIndexMap != nodeIndexMap.end();itToNodeIndexMap++){
+			printf("%d - %d\n",((sillNode *)itToNodeIndexMap->first)->value,itToNodeIndexMap->second);
+		}*/
+		sillHashmap *hashMap = new sillHashmap();
+		hashMap->indexNodeMap = indexNodeMap;
+		hashMap->nodeIndexMap = nodeIndexMap;
+		return hashMap;
+	}
 };
 
 #endif /* SILLUTIL_H_ */

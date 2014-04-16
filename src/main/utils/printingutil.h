@@ -72,6 +72,22 @@ void printIVector(vector<int> userInput,bool withHeadersAndFooters = true){
 	}
 }
 
+void printITVector(vector<itNode *> userInput,bool withHeadersAndFooters = true){
+	if(withHeadersAndFooters){
+		printf("\n====================================================================================================================================\n");
+		printf("PRINTING VECTOR START\n");
+		printf("====================================================================================================================================\n");
+	}
+	for(unsigned int counter = 0;counter < userInput.size();counter++){
+		printf("%d\t",userInput[counter]->value);
+	}
+	if(withHeadersAndFooters){
+		printf("\n====================================================================================================================================\n");
+		printf("PRINTING VECTOR END\n");
+		printf("====================================================================================================================================\n");
+	}
+}
+
 //Tested
 void printITNodeStack(stack<itNode *> auxSpace,bool withHeadersAndFooters = true){
 	if(withHeadersAndFooters){

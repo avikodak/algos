@@ -106,6 +106,11 @@ struct iftNode{
 	}
 };
 
+struct itHashmap{
+	hash_map<unsigned int,itNode *> indexNodeMap;
+	hash_map<uint32_t,unsigned int> nodeIndexMap;
+};
+
 #endif /* TREEDS_H_ */
 
 /****************************************************************************************************************************************************/

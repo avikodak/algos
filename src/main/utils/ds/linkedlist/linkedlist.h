@@ -68,7 +68,7 @@ struct sillNode{
 	}
 };
 
-struct hashmapSill{
+struct sillHashmap{
 	hash_map<unsigned int,sillNode *> indexNodeMap;
 	hash_map<uint32_t,unsigned int> nodeIndexMap;
 };

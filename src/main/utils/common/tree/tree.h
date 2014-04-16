@@ -410,6 +410,93 @@ public:
 		postOrderTraversalIFBST(ptr->right);
 		printf("%d|%d\t",ptr->value,ptr->frequency);
 	}
+
+	//Tested
+	void setVectorWithPreOrderNodes(itNode *ptr,vector<itNode *>  &preOrderNodes){
+		if(ptr == null){
+			return;
+		}
+		preOrderNodes.push_back(ptr);
+		setVectorWithPreOrderNodes(ptr->left,preOrderNodes);
+		setVectorWithPreOrderNodes(ptr->right,preOrderNodes);
+	}
+
+	//Tested
+	void setVectorWithInOrderNodes(itNode *ptr,vector<itNode *> &inOrderNodes){
+		if(ptr == null){
+			return;
+		}
+		setVectorWithInOrderNodes(ptr->left,inOrderNodes);
+		inOrderNodes.push_back(ptr);
+		setVectorWithInOrderNodes(ptr->right,inOrderNodes);
+	}
+
+	//Tested
+	void setVectorWithPostOrderNodes(itNode *ptr,vector<itNode *> &postOrderNodes){
+		if(ptr == null){
+			return;
+		}
+		setVectorWithPostOrderNodes(ptr->left,postOrderNodes);
+		setVectorWithPostOrderNodes(ptr->right,postOrderNodes);
+		postOrderNodes.push_back(ptr);
+	}
+
+	//Tested
+	itHashmap *getHashmapFormITree(itNode *ptr,bool defaultIndex = true){
+		if(ptr == null){
+			return null;
+		}
+		hash_map<unsigned int,itNode *> indexNodeMap;
+		hash_map<uint32_t,unsigned int> nodeIndexMap;
+		hash_map<unsigned int,itNode *>::iterator itToIndexNodeMap;
+		hash_map<uint32_t,unsigned int>::iterator itToNodeIndexMap;
+		queue<itNode *> auxSpace;
+		itNode *currentFrontNodeInQueue;
+		unsigned int currentNodeIndex;
+		auxSpace.push(ptr);
+		if(defaultIndex){
+			indexNodeMap.insert(pair<unsigned int,itNode *>(0,ptr));
+			nodeIndexMap.insert(pair<uint32_t,unsigned int>((uint32_t)ptr,0));
+		}else{
+			indexNodeMap.insert(pair<unsigned int,itNode *>(1,ptr));
+			nodeIndexMap.insert(pair<uint32_t,unsigned int>((uint32_t)ptr,1));
+		}
+		while(!auxSpace.empty()){
+			currentFrontNodeInQueue = auxSpace.front();
+			auxSpace.pop();
+			currentNodeIndex = nodeIndexMap.find((uint32_t)currentFrontNodeInQueue)->second;
+			if(currentFrontNodeInQueue->left != null){
+				if(defaultIndex){
+					indexNodeMap.insert(pair<unsigned int,itNode *>(2*currentNodeIndex+1,currentFrontNodeInQueue->left));
+					nodeIndexMap.insert(pair<uint32_t,unsigned int>((uint32_t)currentFrontNodeInQueue->left,2*currentNodeIndex+1));
+				}else{
+					indexNodeMap.insert(pair<unsigned int,itNode *>(2*currentNodeIndex,currentFrontNodeInQueue->left));
+					nodeIndexMap.insert(pair<uint32_t,unsigned int>((uint32_t)currentFrontNodeInQueue->left,2*currentNodeIndex));
+				}
+				auxSpace.push(currentFrontNodeInQueue->left);
+			}
+			if(currentFrontNodeInQueue->right != null){
+				if(defaultIndex){
+					indexNodeMap.insert(pair<unsigned int,itNode *>(2*currentNodeIndex+2,currentFrontNodeInQueue->right));
+					nodeIndexMap.insert(pair<uint32_t,unsigned int>((uint32_t)currentFrontNodeInQueue->right,2*currentNodeIndex+2));
+				}else{
+					indexNodeMap.insert(pair<unsigned int,itNode *>(2*currentNodeIndex+1,currentFrontNodeInQueue->right));
+					nodeIndexMap.insert(pair<uint32_t,unsigned int>((uint32_t)currentFrontNodeInQueue->right,2*currentNodeIndex+1));
+				}
+				auxSpace.push(currentFrontNodeInQueue->right);
+			}
+		}
+		/*for(itToIndexNodeMap = indexNodeMap.begin();itToIndexNodeMap != indexNodeMap.end();itToIndexNodeMap++){
+			printf("%d - %d\n",itToIndexNodeMap->first,itToIndexNodeMap->second->value);
+		}
+		for(itToNodeIndexMap = nodeIndexMap.begin();itToNodeIndexMap != nodeIndexMap.end();itToNodeIndexMap++){
+			printf("%d - %d\n",((itNode *)itToNodeIndexMap->first)->value,itToNodeIndexMap->second);
+		}*/
+		itHashmap *hashMap = new itHashmap();
+		hashMap->indexNodeMap = indexNodeMap;
+		hashMap->nodeIndexMap = nodeIndexMap;
+		return hashMap;
+	}
 };
 
 #endif /* TREE_H_ */
