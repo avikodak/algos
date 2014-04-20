@@ -40,11 +40,15 @@
 #include "main/sites/geeksforgeeks/trees/page09/treetraversals.h"
 #include "main/sites/geeksforgeeks/trees/page09/sizeoftree.h"
 #include "main/sites/geeksforgeeks/trees/page09/treeidentical.h"
+#include "main/sites/geeksforgeeks/trees/page09/heightoftree.h"
 #include "main/sites/geeksforgeeks/linkedlists/page05/nthnodeinsll.h"
 #include "main/sites/geeksforgeeks/linkedlists/page05/printmiddlesill.h"
+#include "main/sites/geeksforgeeks/linkedlists/page05/nthnodefromend.h"
 #include "main/sites/geeksforgeeks/arrays/page09/checkforpairforsum.h"
 #include "main/sites/geeksforgeeks/arrays/page09/majorityelement.h"
 #include "main/sites/geeksforgeeks/arrays/page09/oddnumberoftimes.h"
+#include "main/sites/geeksforgeeks/arrays/page09/findmissingnumber.h"
+#include "main/sites/geeksforgeeks/arrays/page09/largestsumcontigoussubarray.h"
 #include "main/utils/printingutil.h"
 
 #define PRINT_NEW_LINE printf("\n")
@@ -58,15 +62,35 @@
 /* 																MAIN CODE START 																    */
 /****************************************************************************************************************************************************/
 
-int main(){
-	printf("------------------------------------------ Test Starting ----------------------------------\n");
-	vector<int> randomVector = generateIVector(9,0,50);
+void testCaseForUserInputs(){
+	vector<int> userInput;
+	int noOfTestCase,testCaseSize,temp;
+	cin >> noOfTestCase;
+	while(noOfTestCase--){
+		cin >> testCaseSize;
+		for(int counter = 0;counter < testCaseSize;counter++){
+			scanf("%d",&temp);
+			userInput.push_back(temp);
+		}
+		//printf("%d",largestSumContigousSubarrayON2(userInput));
+		userInput.clear();
+	}
+}
+
+void linkedListTest(){
+	vector<int> randomVector = generateIVector(7,0,50);
 	printIVector(randomVector);
 	sillutils *utils = new sillutils();
 	sillNode *head = utils->createSILLFromVector(randomVector);
-	unsigned int middleIndex = 0;
-	printMiddleLinkedListByFindingLength(head,middleIndex);
+	printf("%d",head->value);//dummy print
+}
 
+int main(){
+	printf("------------------------------------------ Test Starting ----------------------------------\n");
+	vector<int> randomVector = generateIVector(1,1,50);
+	treeutils *utils = new treeutils();
+	itNode *root = utils->getITreeFromVector(randomVector);
+	printf("%d",heightOfTreeLevelOrderON2(root));
 	printf("\n------------------------------------------- Test End -------------------------------------");
 	return 0;
 }

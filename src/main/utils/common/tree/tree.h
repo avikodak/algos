@@ -152,6 +152,12 @@ private:
 		}
 	}
 
+	void getFBSTFromSillMain(iftNode **ptr,iftNode *currentNode,sillNode *ptr){
+		if(ptr == null){
+			return;
+		}
+	}
+
 	//Tested
 	itNode *getParentNodeForInsertionBST(itNode *ptr,int value){
 		if(ptr == null){
@@ -308,6 +314,15 @@ public:
 				}
 			}
 		}
+		return rootFBST;
+	}
+
+	iftNode *getFBSTFromSill(sillNode *ptr){
+		if(ptr == null){
+			return null;
+		}
+		iftNode *rootFBST = null;
+		getFBSTFromSillMain(&rootFBST,rootFBST,ptr);
 		return rootFBST;
 	}
 
