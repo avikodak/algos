@@ -41,6 +41,8 @@
 #include "main/sites/geeksforgeeks/trees/page09/sizeoftree.h"
 #include "main/sites/geeksforgeeks/trees/page09/treeidentical.h"
 #include "main/sites/geeksforgeeks/trees/page09/heightoftree.h"
+#include "main/sites/geeksforgeeks/trees/page09/roottoleafpaths.h"
+#include "main/sites/geeksforgeeks/trees/page09/treetomirrorimage.h"
 #include "main/sites/geeksforgeeks/linkedlists/page05/nthnodeinsll.h"
 #include "main/sites/geeksforgeeks/linkedlists/page05/printmiddlesill.h"
 #include "main/sites/geeksforgeeks/linkedlists/page05/nthnodefromend.h"
@@ -49,6 +51,8 @@
 #include "main/sites/geeksforgeeks/arrays/page09/oddnumberoftimes.h"
 #include "main/sites/geeksforgeeks/arrays/page09/findmissingnumber.h"
 #include "main/sites/geeksforgeeks/arrays/page09/largestsumcontigoussubarray.h"
+#include "main/sites/geeksforgeeks/arrays/page09/searchinsortedpivoted.h"
+#include "main/sites/geeksforgeeks/arrays/page09/mergesortedarray.h"
 #include "main/utils/printingutil.h"
 
 #define PRINT_NEW_LINE printf("\n")
@@ -62,7 +66,7 @@
 /* 																MAIN CODE START 																    */
 /****************************************************************************************************************************************************/
 
-void testCaseForUserInputs(){
+void testCaseArrayUserinput(){
 	vector<int> userInput;
 	int noOfTestCase,testCaseSize,temp;
 	cin >> noOfTestCase;
@@ -72,9 +76,29 @@ void testCaseForUserInputs(){
 			scanf("%d",&temp);
 			userInput.push_back(temp);
 		}
-		//printf("%d",largestSumContigousSubarrayON2(userInput));
+		scanf("%d",&temp);
+		printf("%d",searchForValueInSortedPivorArrayOLOGN(userInput,temp,0,userInput.size()-1));
 		userInput.clear();
 	}
+}
+
+void testCaseArray(){
+	vector<int> largeSortedArray;
+	vector<int> smallerSortedArray;
+	unsigned int noOfInputs;
+	int temp;
+	scanf("%d",&noOfInputs);
+	while(noOfInputs--){
+		scanf("%d",&temp);
+		largeSortedArray.push_back(temp);
+	}
+	scanf("%d",&noOfInputs);
+	while(noOfInputs--){
+		scanf("%d",&temp);
+		smallerSortedArray.push_back(temp);
+	}
+	mergeSortedArrayONLOGN(largeSortedArray,smallerSortedArray);
+	printIVector(largeSortedArray);
 }
 
 void linkedListTest(){
@@ -85,12 +109,22 @@ void linkedListTest(){
 	printf("%d",head->value);//dummy print
 }
 
-int main(){
-	printf("------------------------------------------ Test Starting ----------------------------------\n");
-	vector<int> randomVector = generateIVector(1,1,50);
+void testCaseTree(){
+	vector<int> randomVector = generateIVector(10,1,50);
+	printIVector(randomVector);
 	treeutils *utils = new treeutils();
 	itNode *root = utils->getITreeFromVector(randomVector);
-	printf("%d",heightOfTreeLevelOrderON2(root));
+	utils->preOrderTraversal(root);
+	treeToMirrorImageHashmapTopToBottom(root);
+	PRINT_NEW_LINE;
+	utils->preOrderTraversal(root);
+	PRINT_NEW_LINE;
+	levelOrderTraversal(root);
+}
+
+int main(){
+	printf("------------------------------------------ Test Starting ----------------------------------\n");
+	testCaseArray();
 	printf("\n------------------------------------------- Test End -------------------------------------");
 	return 0;
 }

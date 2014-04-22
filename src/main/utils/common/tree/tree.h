@@ -152,7 +152,7 @@ private:
 		}
 	}
 
-	void getFBSTFromSillMain(iftNode **ptr,iftNode *currentNode,sillNode *ptr){
+	void getFBSTFromSillMain(iftNode **treePtr,iftNode *currentNode,sillNode *ptr){
 		if(ptr == null){
 			return;
 		}
@@ -221,6 +221,12 @@ public:
 			return NULL;
 		}
 		return getITreeFromVectorMain(userInput,0);
+	}
+
+	itNode *getIPTreeFromVector(vector<int> userInput){
+		if(userInput.size() == 0){
+			return NULL;
+		}
 	}
 
 	//Tested

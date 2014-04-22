@@ -70,6 +70,24 @@ struct itNode{
 	}
 };
 
+struct iptNode{
+	int value;
+	iptNode *left;
+	iptNode *right;
+	iptNode *parent;
+
+	iptNode(){
+
+	}
+
+	iptNode(int userInput){
+		value = userInput;
+		left = null;
+		right = null;
+		parent = null;
+	}
+};
+
 struct itNextRightNode{
 	int value;
 	itNextRightNode *left;
