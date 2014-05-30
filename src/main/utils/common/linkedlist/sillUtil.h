@@ -5,7 +5,7 @@
  *  Author				: AVINASH
  *  Testing Status 		: TODO
  *  URL 				: TODO
-****************************************************************************************************************************************************/
+ ****************************************************************************************************************************************************/
 
 /****************************************************************************************************************************************************/
 /* 														NAMESPACE DECLARATION AND IMPORTS 														    */
@@ -100,6 +100,49 @@ public:
 		printSILL(ptr->next);
 	}
 
+	unsigned int lengthOfSILL(sillNode *ptr){
+		if(ptr == null){
+			return 0;
+		}
+		return 1 + lengthOfSILL(ptr->next);
+	}
+
+	//Tested
+	bool areSillsIdentical(sillNode *firstPtr,sillNode *secondPtr){
+		if(firstPtr == null && secondPtr == null){
+			return true;
+		}
+		if(firstPtr == null || secondPtr == null){
+			return false;
+		}
+		return firstPtr->value == secondPtr->value && areSillsIdentical(firstPtr->next,secondPtr->next);
+	}
+
+	//Tested
+	sillNode *reverseSillNewListMain(sillNode **revHead,sillNode *ptr){
+		if(ptr == null){
+			return null;
+		}
+		sillNode *remainingList = reverseSillNewListMain(revHead,ptr->next);
+		sillNode *newNode = new sillNode(ptr->value);
+		if(remainingList != null){
+			remainingList->next = newNode;
+		}else{
+			*revHead = newNode;
+		}
+		return newNode;
+	}
+
+	//Tested
+	sillNode *reverseSillNewList(sillNode *ptr){
+		if(ptr == null){
+			return null;
+		}
+		sillNode *revHead = null;
+		reverseSillNewListMain(&revHead,ptr);
+		return revHead;
+	}
+
 	//Tested
 	sillHashmap *getHashmapOfSILL(sillNode *ptr){
 		if(ptr == null){
@@ -126,6 +169,20 @@ public:
 		hashMap->indexNodeMap = indexNodeMap;
 		hashMap->nodeIndexMap = nodeIndexMap;
 		return hashMap;
+	}
+
+	sillNode *getTailOfSill(sillNode *ptr){
+		if(ptr == null){
+			return null;
+		}
+		while(ptr->next != null){
+			ptr = ptr->next;
+		}
+		return ptr;
+	}
+
+	void selectionSortSill(sillNode *ptr,bool asc = true){
+
 	}
 };
 

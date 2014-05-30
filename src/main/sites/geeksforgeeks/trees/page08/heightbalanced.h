@@ -1,10 +1,10 @@
 /****************************************************************************************************************************************************
- *  File Name   		: treeds.h 
- *	File Location		: C:\Users\AVINASH\Desktop\CC++\algorithms\src\main\utils\ds\tree\treeds.h
- *  Created on			: Apr 10, 2014 :: 3:04:12 AM
+ *  File Name   		: heightbalanced.h 
+ *	File Location		: C:\Users\AVINASH\Desktop\CC++\algorithms\src\main\sites\geeksforgeeks\trees\page08\heightbalanced.h
+ *  Created on			: May 1, 2014 :: 8:49:35 AM
  *  Author				: AVINASH
  *  Testing Status 		: TODO
- *  URL 				: TODO
+ *  URL 				: http://www.geeksforgeeks.org/how-to-determine-if-a-binary-tree-is-balanced/
  ****************************************************************************************************************************************************/
 
 /****************************************************************************************************************************************************/
@@ -40,6 +40,8 @@ using namespace __gnu_cxx;
 #include <stack>
 #include <queue>
 #include <limits.h>
+#include <algos/utils/ds/tree/treeds.h>
+#include <algos/utils/common/tree/tree.h>
 
 /****************************************************************************************************************************************************/
 /* 															USER DEFINED CONSTANTS 																    */
@@ -48,132 +50,51 @@ using namespace __gnu_cxx;
 #define null NULL
 
 /****************************************************************************************************************************************************/
-/* 															TREE DATA STRUCTURES START 																*/
+/* 																MAIN CODE START 																    */
 /****************************************************************************************************************************************************/
 
-#ifndef TREEDS_H_
-#define TREEDS_H_
-
-struct itNode{
-	int value;
-	itNode *left;
-	itNode *right;
-
-	itNode(){
-
-	}
-
-	itNode(int userInput){
-		value = userInput;
-		left = NULL;
-		right = NULL;
-	}
-};
-
-struct iptNode{
-	int value;
-	iptNode *left;
-	iptNode *right;
-	iptNode *parent;
-
-	iptNode(){
-
-	}
-
-	iptNode(int userInput){
-		value = userInput;
-		left = null;
-		right = null;
-		parent = null;
-	}
-};
-
-struct iTernaryTreeNode{
-	char ch;
-	bool isLeafNode;
-	iTernaryTreeNode *left;
-	iTernaryTreeNode *equal;
-	iTernaryTreeNode *right;
-
-	iTernaryTreeNode(){
-
-	}
-
-	iTernaryTreeNode(char inputCh){
-		ch = inputCh;
-		isLeafNode = false;
-		left = null;
-		equal = null;
-		right = null;
-	}
-};
-
-struct itNextRightNode{
-	int value;
-	itNextRightNode *left;
-	itNextRightNode *right;
-	itNextRightNode *nextRight;
-
-	itNextRightNode(){
-
-	}
-
-	itNextRightNode(int userInput){
-		value = userInput;
-		left = null;
-		right = null;
-		nextRight = null;
-	}
-};
-
-struct iftNode{
-	int value;
-	unsigned int frequency;
-	iftNode *left;
-	iftNode *right;
-
-	iftNode(){
-
-	}
-
-	iftNode(int userInput){
-		value = userInput;
-		left = null;
-		right = null;
-		frequency = 1;
-	}
-};
-
-struct iltNode{
-	int value;
-	unsigned int level;
-	iltNode *left;
-	iltNode *right;
-
-	iltNode(){
-
-	}
-
-	iltNode(int userInput){
-		value = userInput;
-		left =  null;
-		right = null;
-		level = 0;
-	}
-};
-
-struct itHashmap{
-	hash_map<unsigned int,itNode *> indexNodeMap;
-	hash_map<uint32_t,unsigned int> nodeIndexMap;
-};
-
-struct itNodeValueHashmap{
-	hash_map<uint32_t,int> nodeValueMap;
-	hash_map<int,vector<itNode *> > valueNodesMap;
-};
-
-#endif /* TREEDS_H_ */
+#ifndef HEIGHTBALANCED_H_
+#define HEIGHTBALANCED_H_
 
 /****************************************************************************************************************************************************/
-/* 															TREE DATA STRUCTURES END 																*/
+/* 																	O(N) Algorithm 																    */
+/****************************************************************************************************************************************************/
+//Tested
+unsigned int isTreeHeightBalancedOptimizedMain(itNode *ptr){
+	if(ptr == null){
+		return 0;
+	}
+	unsigned int leftHeight = isTreeHeightBalancedOptimizedMain(ptr->left);
+	unsigned int rightHeight = isTreeHeightBalancedOptimizedMain(ptr->right);
+	return abs(leftHeight-rightHeight) > 1?UINT_MAX:1+max(leftHeight,rightHeight);
+}
+
+//Tested
+bool isTreeHeightBalancedOptimized(itNode *ptr){
+	if(ptr == null){
+		return 0;
+	}
+	return isTreeHeightBalancedOptimizedMain(ptr) == UINT_MAX?false:true;
+}
+
+/****************************************************************************************************************************************************/
+/* 																O(N^2) Algorithm 																    */
+/****************************************************************************************************************************************************/
+//Tested
+bool isTreeHeightBalanced(itNode *ptr){
+	if(ptr == null){
+		return true;
+	}
+	static treeutils *utils = new treeutils();
+	unsigned int leftHeight = utils->heightOfTree(ptr->left),rightHeight = utils->heightOfTree(ptr->right);
+	if(abs(leftHeight-rightHeight) > 1){
+		return false;
+	}
+	return isTreeHeightBalanced(ptr->left) && isTreeHeightBalanced(ptr->right);
+}
+
+#endif /* HEIGHTBALANCED_H_ */
+
+/****************************************************************************************************************************************************/
+/* 																MAIN CODE END 																	    */
 /****************************************************************************************************************************************************/

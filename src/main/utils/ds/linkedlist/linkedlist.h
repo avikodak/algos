@@ -68,6 +68,68 @@ struct sillNode{
 	}
 };
 
+struct dillNode{
+	int value;
+	dillNode *prev;
+	dillNode *next;
+
+	dillNode(){
+
+	}
+
+	dillNode(int userInput){
+		value = userInput;
+		prev = null;
+		next = null;
+	}
+};
+
+struct xordillNode{
+	int value;
+	uint32_t xorValue;
+
+	xordillNode(){
+
+	}
+
+	xordillNode(int userInput){
+		value = userInput;
+		xorValue = 0;
+	}
+};
+
+struct sillfNode{
+	int value;
+	bool flag;
+	sillfNode *next;
+
+	sillfNode(){
+
+	}
+
+	sillfNode(int userInput){
+		value = userInput;
+		flag = false;
+		next = null;
+	}
+};
+
+struct sillArbitPtrNode{
+	int value;
+	sillArbitPtrNode *next;
+	sillArbitPtrNode *arbitrary;
+
+	sillArbitPtrNode(){
+
+	}
+
+	sillArbitPtrNode(int userInput){
+		value = userInput;
+		next = null;
+		arbitrary = null;
+	}
+};
+
 struct sillHashmap{
 	hash_map<unsigned int,sillNode *> indexNodeMap;
 	hash_map<uint32_t,unsigned int> nodeIndexMap;

@@ -44,7 +44,7 @@ using namespace __gnu_cxx;
 /****************************************************************************************************************************************************/
 /* 															USER DEFINED CONSTANTS 																    */
 /****************************************************************************************************************************************************/
-
+#define PRINT_NEW_LINE printf("\n")
 #define null NULL
 
 /****************************************************************************************************************************************************/
@@ -65,6 +65,32 @@ private:
 		itNode *node = getNewITreeNode(userInput[currentIndex]);
 		node->left = getITreeFromVectorMain(userInput,2*currentIndex + 1);
 		node->right = getITreeFromVectorMain(userInput,2*currentIndex + 2);
+		return node;
+	}
+
+	itNode *getITreeFromHashmapMain(hash_map<unsigned int,int> &indexValueMap,unsigned int currentIndex){
+		if(indexValueMap.size() == 0){
+			return null;
+		}
+		hash_map<unsigned int,int>::iterator itToIndexValueMap = indexValueMap.find(currentIndex);
+		if(itToIndexValueMap == indexValueMap.end()){
+			return null;
+		}
+		itNode *node = new itNode(itToIndexValueMap->second);
+		node->left = getITreeFromHashmapMain(indexValueMap,2*currentIndex+1);
+		node->right = getITreeFromHashmapMain(indexValueMap,2*currentIndex+2);
+		return node;
+	}
+
+	//Tested
+	iptNode *getIPTreeFromVectorMain(vector<int> userInput,unsigned int currentIndex,iptNode *parentPtr){
+		if(userInput.size() == 0 || currentIndex >= userInput.size()){
+			return null;
+		}
+		iptNode *node = new iptNode(userInput[currentIndex]);
+		node->parent = parentPtr;
+		node->left = getIPTreeFromVectorMain(userInput,2*currentIndex+1,node);
+		node->right = getIPTreeFromVectorMain(userInput,2*currentIndex+2,node);
 		return node;
 	}
 
@@ -115,6 +141,34 @@ private:
 					getBSTFromVectorMain(ptr,*ptr,userInput,currentIndex+1);
 				}else{
 					getBSTFromVectorMain(ptr,currentNode->right,userInput,currentIndex);
+				}
+			}
+		}
+	}
+
+	void getPBSTFromVectorMain(iptNode **ptr,iptNode *currentNode,vector<int> userInput,unsigned int currentIndex){
+		if(userInput.size() == 0 || currentIndex >= userInput.size()){
+			return;
+		}
+		if(*ptr == null){
+			*ptr  = new iptNode(userInput[currentIndex]);
+			getPBSTFromVectorMain(ptr,*ptr,userInput,currentIndex+1);
+		}else{
+			if(currentNode->value > userInput[currentIndex]){
+				if(currentNode->left == null){
+					currentNode->left = new iptNode(userInput[currentIndex]);
+					currentNode->left->parent = currentNode;
+					getPBSTFromVectorMain(ptr,*ptr,userInput,currentIndex+1);
+				}else{
+					getPBSTFromVectorMain(ptr,currentNode->left,userInput,currentIndex);
+				}
+			}else{
+				if(currentNode->right == null){
+					currentNode->right = new iptNode(userInput[currentIndex]);
+					currentNode->right->parent = currentNode;
+					getPBSTFromVectorMain(ptr,*ptr,userInput,currentIndex+1);
+				}else{
+					getPBSTFromVectorMain(ptr,currentNode->right,userInput,currentIndex);
 				}
 			}
 		}
@@ -223,10 +277,56 @@ public:
 		return getITreeFromVectorMain(userInput,0);
 	}
 
-	itNode *getIPTreeFromVector(vector<int> userInput){
+	itNode *getITreeFromHashmap(hash_map<unsigned int,int> indexValueMap){
+		if(indexValueMap.size() == 0){
+			return null;
+		}
+		return getITreeFromHashmapMain(indexValueMap,0);
+	}
+
+	itNode *getITreeFromHashmapOptimized(hash_map<unsigned int,int> &indexValueMap){
+		if(indexValueMap.size() == 0){
+			return null;
+		}
+		hash_map<unsigned int,int>::iterator itToIndexValueMap = indexValueMap.find(0);
+		hash_map<unsigned int,itNode *> indexNodeMap;
+		hash_map<unsigned int,itNode *>::iterator itToIndexNodeMap;
+		if(itToIndexValueMap == indexValueMap.end()){
+			throw "Invalid hash map";
+		}
+		itNode *root = new itNode(itToIndexValueMap->second);
+		indexNodeMap.insert(pair<unsigned int,itNode *>(0,root));
+		for(itToIndexValueMap = indexValueMap.begin();itToIndexNodeMap != indexNodeMap.end();itToIndexValueMap++){
+			if(itToIndexNodeMap->first == 0){
+				continue;
+			}
+			itToIndexNodeMap = indexNodeMap.find(itToIndexValueMap->first);
+			if(itToIndexNodeMap == indexNodeMap.end()){
+				throw "Invalid hash map";
+			}
+			if(itToIndexValueMap->first&1){
+				if(itToIndexNodeMap->second->left != null){
+					throw "Invalid hash map";
+				}
+				itToIndexNodeMap->second->left = new itNode(itToIndexValueMap->second);
+				indexNodeMap.insert(pair<unsigned int,itNode *>(2*itToIndexValueMap->first+1,itToIndexNodeMap->second->left));
+			}else{
+				if(itToIndexNodeMap->second->right != null){
+					throw "Invalid hash map";
+				}
+				itToIndexNodeMap->second->right = new itNode(itToIndexValueMap->second);
+				indexNodeMap.insert(pair<unsigned int,itNode *>(2*itToIndexValueMap->first+2,itToIndexNodeMap->second->right));
+			}
+		}
+		return root;
+	}
+
+	//Tested
+	iptNode *getIPTreeFromVector(vector<int> userInput){
 		if(userInput.size() == 0){
 			return NULL;
 		}
+		return getIPTreeFromVectorMain(userInput,0,null);
 	}
 
 	//Tested
@@ -290,6 +390,22 @@ public:
 		itNode *rootBST = null;
 		getBSTFromVectorMain(&rootBST,rootBST,userInput,0);
 		return rootBST;
+	}
+
+	iptNode *getPBSTFromVector(vector<int> userInput){
+		if(userInput.size() == 0 ){
+			return null;
+		}
+		iptNode *rootBST = null;
+		getPBSTFromVectorMain(&rootBST,rootBST,userInput,0);
+		return rootBST;
+	}
+
+	void appendToFBST(iftNode **ptr,vector<int> userInput){
+		if(userInput.size() == 0){
+			return;
+		}
+		getFBSTFromVectorMain(ptr,*ptr,userInput,0);
 	}
 
 	//Tested
@@ -403,6 +519,59 @@ public:
 	}
 
 	//Tested
+	void levelOrderTraversal(itNode *ptr){
+		if(ptr == null){
+			return;
+		}
+		queue<itNode *> auxSpace;
+		itNode *currentNode;
+		auxSpace.push(ptr);
+		unsigned int currentLevelSize;
+		while(!auxSpace.empty()){
+			currentLevelSize = auxSpace.size();
+			while(currentLevelSize--){
+				currentNode = auxSpace.front();
+				auxSpace.pop();
+				printf("%d\t",currentNode->value);
+				if(currentNode->left != null){
+					auxSpace.push(currentNode->left);
+				}
+				if(currentNode->right != null){
+					auxSpace.push(currentNode->right);
+				}
+			}
+			PRINT_NEW_LINE;
+		}
+	}
+
+	void preOrderPTraversal(iptNode *ptr){
+		if(ptr == null){
+			return;
+		}
+		printf("%d\t",ptr->value);
+		preOrderPTraversal(ptr->left);
+		preOrderPTraversal(ptr->right);
+	}
+
+	void inOrderPTraversal(iptNode *ptr){
+		if(ptr == null){
+			return;
+		}
+		inOrderPTraversal(ptr->left);
+		printf("%d\t",ptr->value);
+		inOrderPTraversal(ptr->right);
+	}
+
+	void postOrderPTraversal(iptNode *ptr){
+		if(ptr == null){
+			return;
+		}
+		postOrderPTraversal(ptr->left);
+		postOrderPTraversal(ptr->right);
+		printf("%d\t",ptr->value);
+	}
+
+	//Tested
 	void preOrderTraversalIFBST(iftNode *ptr){
 		if(ptr == null){
 			return;
@@ -462,6 +631,34 @@ public:
 		postOrderNodes.push_back(ptr);
 	}
 
+	void setVectorWithPreOrderValues(itNode *ptr,vector<int> &preOrderValues){
+		if(ptr == null){
+			return;
+		}
+		preOrderValues.push_back(ptr->value);
+		setVectorWithPreOrderValues(ptr->left,preOrderValues);
+		setVectorWithPreOrderValues(ptr->right,preOrderValues);
+	}
+
+	//Tested
+	void setVectorWithInOrderValues(itNode *ptr,vector<int> &inOrderValues){
+		if(ptr == null){
+			return;
+		}
+		setVectorWithInOrderValues(ptr->left,inOrderValues);
+		inOrderValues.push_back(ptr->value);
+		setVectorWithInOrderValues(ptr->right,inOrderValues);
+	}
+
+	void setVectorWithPostOrderValues(itNode *ptr,vector<int> &postOrderValues){
+		if(ptr == null){
+			return;
+		}
+		setVectorWithPostOrderValues(ptr->left,postOrderValues);
+		setVectorWithPostOrderValues(ptr->right,postOrderValues);
+		postOrderValues.push_back(ptr->value);
+	}
+
 	//Tested
 	itHashmap *getHashmapFormITree(itNode *ptr,bool defaultIndex = true){
 		if(ptr == null){
@@ -517,6 +714,29 @@ public:
 		hashMap->indexNodeMap = indexNodeMap;
 		hashMap->nodeIndexMap = nodeIndexMap;
 		return hashMap;
+	}
+
+	void setNodeValueHashmapForTree(itNode *ptr,itNodeValueHashmap *nodeValueHashmap){
+		if(ptr == null){
+			return;
+		}
+		nodeValueHashmap->nodeValueMap.insert(pair<uint32_t,int>((uint32_t)ptr,ptr->value));
+		hash_map<int,vector<itNode *> >::iterator itToValueNodesMap;
+		if((itToValueNodesMap = nodeValueHashmap->valueNodesMap.find(ptr->value)) != nodeValueHashmap->valueNodesMap.end()){
+			vector<itNode *> nodesVector;
+			nodesVector.push_back(ptr);
+			nodeValueHashmap->valueNodesMap.insert(pair<int,vector<itNode *> >(ptr->value,nodesVector));
+		}else{
+			itToValueNodesMap->second.push_back(ptr);
+		}
+		setNodeValueHashmapForTree(ptr->left,nodeValueHashmap);
+		setNodeValueHashmapForTree(ptr->right,nodeValueHashmap);
+	}
+
+	itNodeValueHashmap *getNodeValueHashMap(itNode *ptr){
+		itNodeValueHashmap *nodeValueHashMap = new itNodeValueHashmap();
+		setNodeValueHashmapForTree(ptr,nodeValueHashMap);
+		return nodeValueHashMap;
 	}
 };
 
