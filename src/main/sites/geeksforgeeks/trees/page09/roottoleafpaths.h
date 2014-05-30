@@ -4,7 +4,7 @@
  *  Created on			: Apr 21, 2014 :: 11:28:09 AM
  *  Author				: AVINASH
  *  Testing Status 		: TODO
- *  URL 				: TODO
+ *  URL 				: http://www.geeksforgeeks.org/given-a-binary-tree-print-out-all-of-its-root-to-leaf-paths-one-per-line/
  ****************************************************************************************************************************************************/
 
 /****************************************************************************************************************************************************/
@@ -80,6 +80,7 @@ void rootToLeafPathPreOrderTraversal(itNode *ptr,queue<itNode *> auxSpace){
 	rootToLeafPathPreOrderTraversal(ptr->right,auxSpace);
 }
 
+//Tested
 void rootToLeafPathPreOrderParentPtr(iptNode *ptr){
 	if(ptr == null){
 		return;
@@ -148,6 +149,197 @@ void rootToLeafPathPreOrderTraversalIterative(itNode *ptr){
 	}
 }
 
+//Tested
+void printRootToLeafInOrderIterative(itNode *ptr){
+	if(ptr == null){
+		return;
+	}
+	hash_map<uint32_t,unsigned int> nodeIndexMap;
+	hash_map<uint32_t,unsigned int>::iterator itToNodeIndexMap;
+	hash_map<unsigned int,itNode *> indexNodeMap;
+	hash_map<unsigned int,itNode *>::iterator itToIndexNodeMap;
+	stack<itNode *> auxSpace;
+	itNode *currentNode = ptr;
+	auxSpace.push(ptr);
+	nodeIndexMap.insert(pair<uint32_t,unsigned int>((uint32_t)ptr,1));
+	indexNodeMap.insert(pair<unsigned int,itNode *>(1,ptr));
+	while(!auxSpace.empty() || currentNode != null){
+		if(currentNode != null){
+			itToNodeIndexMap = nodeIndexMap.find((uint32_t)currentNode);
+			auxSpace.push(currentNode);
+			if(currentNode->left != null){
+				nodeIndexMap.insert(pair<uint32_t,unsigned int>((uint32_t)currentNode->left,2*itToNodeIndexMap->second));
+				indexNodeMap.insert(pair<unsigned int,itNode *>(2*itToNodeIndexMap->second,currentNode->left));
+			}
+			currentNode = currentNode->left;
+		}else{
+			currentNode = auxSpace.top();
+			auxSpace.pop();
+			itToNodeIndexMap = nodeIndexMap.find((uint32_t)currentNode);
+			if(currentNode->left == null && currentNode->right == null){
+				unsigned int currentNodeIndex = itToNodeIndexMap->second;
+				while(currentNodeIndex > 0){
+					itToIndexNodeMap = indexNodeMap.find(currentNodeIndex);
+					currentNodeIndex /= 2;
+					printf("%d\t",itToIndexNodeMap->second->value);
+				}
+				PRINT_NEW_LINE;
+			}
+			if(currentNode->right != null){
+				nodeIndexMap.insert(pair<uint32_t,unsigned int>((uint32_t)currentNode->right,2*itToNodeIndexMap->second+1));
+				indexNodeMap.insert(pair<unsigned int,itNode *>(2*itToNodeIndexMap->second+1,currentNode->right));
+			}
+			currentNode = currentNode->right;
+		}
+	}
+}
+
+//Tested
+void printRootToLeafPostOrderTwoStacksIterative(itNode *ptr){
+	if(ptr == null){
+		return;
+	}
+	stack<itNode *> primaryAuxspace,secondaryAuxspace;
+	itNode *currentNode;
+	hash_map<unsigned int,itNode *> indexNodeMap;
+	hash_map<unsigned int,itNode *>::iterator itToIndexNodeMap;
+	hash_map<uint32_t,unsigned int> nodeIndexMap;
+	hash_map<uint32_t,unsigned int>::iterator itToNodeIndexMap;
+	indexNodeMap.insert(pair<unsigned int,itNode *>(1,ptr));
+	nodeIndexMap.insert(pair<uint32_t,unsigned int>((uint32_t)ptr,1));
+	primaryAuxspace.push(ptr);
+	while(!primaryAuxspace.empty()){
+		currentNode = primaryAuxspace.top();
+		primaryAuxspace.pop();
+		secondaryAuxspace.push(currentNode);
+		itToNodeIndexMap = nodeIndexMap.find((uint32_t)currentNode);
+		if(currentNode->left != null){
+			indexNodeMap.insert(pair<unsigned int,itNode *>(2*itToNodeIndexMap->second,currentNode->left));
+			nodeIndexMap.insert(pair<uint32_t,unsigned int>((uint32_t)currentNode->left,2*itToNodeIndexMap->second));
+			primaryAuxspace.push(currentNode->left);
+		}
+		if(currentNode->right != null){
+			indexNodeMap.insert(pair<unsigned int,itNode *>(2*itToNodeIndexMap->second+1,currentNode->right));
+			nodeIndexMap.insert(pair<uint32_t,unsigned int>((uint32_t)currentNode->right,2*itToNodeIndexMap->second+1));
+			primaryAuxspace.push(currentNode->right);
+		}
+	}
+	while(!secondaryAuxspace.empty()){
+		currentNode = secondaryAuxspace.top();
+		secondaryAuxspace.pop();
+		if(currentNode->left == null && currentNode->right == null){
+			itToNodeIndexMap = nodeIndexMap.find((uint32_t)currentNode);
+			unsigned int currentNodeIndex = itToNodeIndexMap->second;
+			while(currentNodeIndex > 0){
+				itToIndexNodeMap = indexNodeMap.find(currentNodeIndex);
+				printf("%d\t",itToIndexNodeMap->second->value);
+				currentNodeIndex /= 2;
+			}
+			PRINT_NEW_LINE;
+		}
+	}
+}
+
+//Tested
+void rootToLeafPathsPostOrderIterative(itNode *ptr){
+	if(ptr == null){
+		return;
+	}
+	stack<itNode *> auxSpace;
+	itNode *currentNode = ptr;
+	hash_map<unsigned int,itNode *> indexNodeMap;
+	hash_map<unsigned int,itNode *>::iterator itToIndexNodeMap;
+	hash_map<uint32_t,unsigned int> nodeIndexMap;
+	hash_map<uint32_t,unsigned int>::iterator itToNodeIndexMap;
+	indexNodeMap.insert(pair<unsigned int,itNode *>(1,ptr));
+	nodeIndexMap.insert(pair<uint32_t,unsigned int>((uint32_t)ptr,1));
+	unsigned int currentNodeIndex;
+	while(!auxSpace.empty() || currentNode != null){
+		if(currentNode != null){
+			itToNodeIndexMap = nodeIndexMap.find((uint32_t)currentNode);
+			if(currentNode->right != null){
+				nodeIndexMap.insert(pair<uint32_t,unsigned int>((uint32_t)currentNode->right,2*itToNodeIndexMap->second+1));
+				indexNodeMap.insert(pair<unsigned int,itNode *>(2*itToNodeIndexMap->second+1,currentNode->right));
+				auxSpace.push(currentNode->right);
+			}
+			auxSpace.push(currentNode);
+			if(currentNode->left != null){
+				nodeIndexMap.insert(pair<uint32_t,unsigned int>((uint32_t)currentNode->left,2*itToNodeIndexMap->second));
+				indexNodeMap.insert(pair<unsigned int,itNode *>(2*itToNodeIndexMap->second,currentNode->left));
+			}
+			currentNode = currentNode->left;
+		}else{
+			currentNode = auxSpace.top();
+			auxSpace.pop();
+			if(!auxSpace.empty() && currentNode->right == auxSpace.top()){
+				auxSpace.pop();
+				auxSpace.push(currentNode);
+				currentNode = currentNode->right;
+			}else{
+				if(currentNode->left == null && currentNode->right == null){
+					itToNodeIndexMap = nodeIndexMap.find((uint32_t)currentNode);
+					currentNodeIndex = itToNodeIndexMap->second;
+					while(currentNodeIndex > 0){
+						itToIndexNodeMap = indexNodeMap.find(currentNodeIndex);
+						printf("%d\t",itToIndexNodeMap->second->value);
+						currentNodeIndex /= 2;
+					}
+					PRINT_NEW_LINE;
+				}
+				currentNode = null;
+			}
+		}
+	}
+}
+
+//Tested
+void printStack(stack<itNode *> ancestorsStack,itNode *currentNode){
+	if(ancestorsStack.empty()){
+		return;
+	}
+	stack<itNode *> auxSpace;
+	auxSpace.push(currentNode);
+	while(!ancestorsStack.empty()){
+		auxSpace.push(ancestorsStack.top());
+		ancestorsStack.pop();
+	}
+	while(!auxSpace.empty()){
+		printf("%d\t",auxSpace.top()->value);
+		auxSpace.pop();
+	}
+	PRINT_NEW_LINE;
+}
+
+//Tested
+void rootToLeafPathPostOrderIterativeV2(itNode *ptr){
+	if(ptr == null){
+		return;
+	}
+	stack<itNode *> auxSpace;
+	itNode *currentNode = ptr;
+	while(!auxSpace.empty() || currentNode != null){
+		while(currentNode != null){
+			auxSpace.push(currentNode);
+			currentNode = currentNode->left;
+		}
+		if(!auxSpace.empty() && auxSpace.top()->right == null){
+			currentNode = auxSpace.top();
+			auxSpace.pop();
+			if(currentNode->left == null && currentNode->right == null){
+				printStack(auxSpace,currentNode);
+			}
+			while(!auxSpace.empty() && auxSpace.top()->right == currentNode){
+				currentNode = auxSpace.top();
+				if(currentNode->left == null && currentNode->right == null){
+					printStack(auxSpace,currentNode);
+				}
+				auxSpace.pop();
+			}
+		}
+		currentNode = auxSpace.empty()?null:auxSpace.top()->right;
+	}
+}
+
 /****************************************************************************************************************************************************/
 /* 																O(N^2) Algorithm 																    */
 /****************************************************************************************************************************************************/
@@ -182,9 +374,7 @@ void rootToLeafPathHashmap(itNode *ptr){
 	}
 }
 
-
 #endif /* ROOTTOLEAFPATHS_H_ */
-
 
 /****************************************************************************************************************************************************/
 /* 																MAIN CODE END 																	    */

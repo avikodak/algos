@@ -289,6 +289,34 @@ unsigned int getSizeOfTreePostOrderTraversalAuxspace(itNode *ptr){
 }
 
 //Tested
+unsigned int getSizeOfTreePostOrderTraversalIterativeV2(itNode *ptr){
+	if(ptr == null){
+		return 0;
+	}
+	stack<itNode *> auxSpace;
+	itNode *currentNode = ptr;
+	unsigned int sizeOfTree = 0;
+	while(!auxSpace.empty() || currentNode != null){
+		while(currentNode != null){
+			auxSpace.push(currentNode);
+			currentNode = currentNode->left;
+		}
+		if(!auxSpace.empty() && auxSpace.top()->right == null){
+			currentNode = auxSpace.top();
+			auxSpace.pop();
+			sizeOfTree += 1;
+			while(!auxSpace.empty() && auxSpace.top()->right == currentNode){
+				currentNode = auxSpace.top();
+				auxSpace.pop();
+				sizeOfTree += 1;
+			}
+		}
+		currentNode = auxSpace.empty()?null:auxSpace.top()->right;
+	}
+	return sizeOfTree;
+}
+
+//Tested
 unsigned int getSizeOfTreeLevelOrderTraverssalIterative(itNode *ptr){
 	if(ptr == null){
 		return 0;

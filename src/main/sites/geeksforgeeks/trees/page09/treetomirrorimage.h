@@ -4,7 +4,7 @@
  *  Created on			: Apr 20, 2014 :: 6:37:10 PM
  *  Author				: AVINASH
  *  Testing Status 		: TODO
- *  URL 				: TODO
+ *  URL 				: http://www.geeksforgeeks.org/write-an-efficient-c-function-to-convert-a-tree-into-its-mirror-tree/
 ****************************************************************************************************************************************************/
 
 /****************************************************************************************************************************************************/
@@ -163,6 +163,42 @@ void treeToMirrorImagePostOrderAuxspace(itNode *ptr){
 				currentNode = null;
 			}
 		}
+	}
+}
+
+//Tested
+void swapLeftRightChildren(itNode *ptr){
+	if(ptr == null){
+		return;
+	}
+	itNode *temp = ptr->left;
+	ptr->left = ptr->right;
+	ptr->right = temp;
+}
+
+//Tested
+void treeToMirrorImagePostOrderIterativeV2(itNode *ptr){
+	if(ptr == null){
+		return;
+	}
+	stack<itNode *> auxSpace;
+	itNode *currentNode = ptr;
+	while(!auxSpace.empty() || currentNode != null){
+		while(currentNode != null){
+			auxSpace.push(currentNode);
+			currentNode = currentNode->left;
+		}
+		if(!auxSpace.empty() && auxSpace.top()->right == null){
+			currentNode = auxSpace.top();
+			auxSpace.pop();
+			swapLeftRightChildren(currentNode);
+			while(!auxSpace.empty() && auxSpace.top()->right == currentNode){
+				currentNode = auxSpace.top();
+				swapLeftRightChildren(currentNode);
+				auxSpace.pop();
+			}
+		}
+		currentNode = auxSpace.empty()?null:auxSpace.top()->right;
 	}
 }
 

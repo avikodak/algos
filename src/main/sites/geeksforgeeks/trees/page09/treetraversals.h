@@ -180,6 +180,32 @@ void postOrderTraversalIterativeAuxSpace(itNode *ptr){
 }
 
 //Tested
+void postOrderTraversalIterativeV2(itNode *ptr){
+	if(ptr == null){
+		return;
+	}
+	stack<itNode *> auxSpace;
+	itNode *currentNode = ptr;
+	while(!auxSpace.empty() || currentNode != null){
+		while(currentNode != null){
+			auxSpace.push(currentNode);
+			currentNode = currentNode->left;
+		}
+		if(!auxSpace.empty() && auxSpace.top()->right == null){
+			currentNode = auxSpace.top();
+			auxSpace.pop();
+			printf("%d\t",currentNode->value);
+			while(!auxSpace.empty() && auxSpace.top()->right == currentNode){
+				currentNode = auxSpace.top();
+				printf("%d\t",currentNode->value);
+				auxSpace.pop();
+			}
+		}
+		currentNode = auxSpace.empty()?NULL:auxSpace.top()->right;
+	}
+}
+
+//Tested
 void inOrderTraversal(itNode *ptr){
 	if(ptr == null){
 		return;

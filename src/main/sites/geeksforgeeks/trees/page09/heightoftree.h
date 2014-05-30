@@ -4,7 +4,7 @@
  *  Created on			: Apr 16, 2014 :: 1:49:20 PM
  *  Author				: AVINASH
  *  Testing Status 		: TODO
- *  URL 				: TODO
+ *  URL 				: http://www.geeksforgeeks.org/write-a-c-program-to-find-the-maximum-depth-or-height-of-a-tree/
  ****************************************************************************************************************************************************/
 
 /****************************************************************************************************************************************************/
@@ -249,6 +249,34 @@ unsigned int heightOfTreePostOrderAuxspace(itNode *ptr){
 }
 
 //Tested
+unsigned int heightOfTreePostOrderTraversalIterativeV2(itNode *ptr){
+	if(ptr == null){
+		return 0;
+	}
+	stack<itNode *> auxSpace;
+	itNode *currentNode = ptr;
+	unsigned int heightOfTree = 0;
+	while(!auxSpace.empty() || currentNode != null){
+		while(currentNode != null){
+			auxSpace.push(currentNode);
+			currentNode = currentNode->left;
+		}
+		if(!auxSpace.empty() && auxSpace.top()->right == currentNode){
+			currentNode = auxSpace.top();
+			auxSpace.pop();
+			heightOfTree = max(heightOfTree,auxSpace.size()+1);
+			while(!auxSpace.empty() && auxSpace.top()->right == currentNode){
+				currentNode = auxSpace.top();
+				auxSpace.pop();
+				heightOfTree = max(heightOfTree,auxSpace.size()+1);
+			}
+		}
+		currentNode = auxSpace.empty()?null:auxSpace.top()->right;
+	}
+	return heightOfTree;
+}
+
+//Tested
 unsigned int heightOfTreeInOrderTraversalIterative(itNode *ptr){
 	if(ptr == null){
 		return 0;
@@ -328,7 +356,7 @@ unsigned int heightOfTreeMorrisInOrder(itNode *ptr){
 }
 
 //Tested
-unsigned int heightOfTreeLevelOrderIterative(itNode *ptr){
+unsigned int heightOfTreeLevelOrderMaxindexIterative(itNode *ptr){
 	if(ptr == null){
 		return 0;
 	}
@@ -358,6 +386,32 @@ unsigned int heightOfTreeLevelOrderIterative(itNode *ptr){
 		}
 	}
 	return log2(maxIndex) + 1;
+}
+
+//Tested
+unsigned int heightOfTreeLevelOrderIterative(itNode *ptr){
+	if(ptr == null){
+		return 0;
+	}
+	queue<itNode *> auxSpace;
+	itNode *currentFrontNode;
+	auxSpace.push(ptr);
+	unsigned int nodeLevelCounter = 1,heightOfTree = 0;
+	while(!auxSpace.empty()){
+		while(nodeLevelCounter--){
+			currentFrontNode = auxSpace.front();
+			auxSpace.pop();
+			if(currentFrontNode->left  != null){
+				auxSpace.push(currentFrontNode->left);
+			}
+			if(currentFrontNode->right != null){
+				auxSpace.push(currentFrontNode->right);
+			}
+		}
+		nodeLevelCounter = auxSpace.size();
+		heightOfTree+=1;
+	}
+	return heightOfTree;
 }
 
 /****************************************************************************************************************************************************/
