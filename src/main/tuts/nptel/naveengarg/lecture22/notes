@@ -1,0 +1,60 @@
+Sorting
+	"When in doubt sort" - one of the principles of algorithm design
+	Soring used as a subroutine in many of the algorithms
+		Searching in databases : we can do binary search on sorted data
+		A large number of computer graphics and computational geometry problems
+		Closest Pair,Element Uniqueness
+	A large number of sorting algorithms are developed representing different algorithm design techniques
+	A lower bound for sorting O(nlogn) is used to prove lower bounds of other problems
+	Insertion sort , selections sort,Quick sort
+		Worst-case running time O(pow(n,2)) in place
+	Heap sort
+		Worst-case running time O(nlogn)
+Divide and conquer
+	In this design  principle
+		Divide : if the input size is too large to deal with in a straightforward manner , divide the problem into two or more disjoint subproblems
+		Conquer : Use divide and conquer recursively to solve the subproblems
+		Combine : Take the solutions to the subproblems and merge these solutions into a solution for the original problem
+Merge sort algorithm
+	Divide 
+		If S has atleast two elements remove all the elements from S and put them into two sequences S1 and S2 each containing about half of the elements of S
+	Conquer
+		Sort sequence S1 and S2 using merge sort
+	Combine
+		Put back the elements into S by merging the sorted sequences S1 and S2 into one sorted sequence
+Merge sort
+	Mergesort(A,p,r)
+		if(p<r) then
+			q <- (p+r)/2
+			MergeSort(A,p,q)
+			MergeSort(A,q+1,r)
+	Merge(A,p,q,r)
+		Take the smallest of the two topmost elements of sequences A[p...q] and A[q+1...r] and puts into the resulting sequence Repeat this untill both sequence are empy
+		Copy the resulting sequence into A[p..r]
+Merge Sort Revisited
+	To sort n numbers
+		if n=1 done
+		Recursively sort 2 lists of numbers n/2 and n/2 elements
+		Merge 2 sorted lists in O(n) time
+	Strategy
+		Break problem into similar subproblems
+		Recursively solve subproblems
+		Combine solutions to answer
+Recurrences
+	Runnning times of algorithms with recursive callse can be described using recurrences
+	A recurrence is an equation or inequality that describes a function in terms of its value on smaller inputs
+				Solving trivial problems
+	T(n)	=	
+				num_pieces * T(n/subproblems) + dividing + combining
+Solving recurrences
+	Repeated substitution method
+		Expanding the recurrence by substitution and noticing patterns
+	Substitution method
+		Gussing the solutions	
+		Verifying the solution by the mathematical induction
+	Recursion-trees
+	Master method
+		templates for different classes of recurrences
+	
+	
+	

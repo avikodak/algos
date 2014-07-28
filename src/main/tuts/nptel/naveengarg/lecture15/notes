@@ -1,0 +1,16 @@
+Insertion into red black tree
+	Let k be the key being inserted
+	As in the case of a BST we first search for k this gives us the place where we have to insert k
+	We create a new node with key k and insert it at this place
+	The new node is colored red
+	Since inserted node is colored red black height of the tree remains unchanged
+	However if the parent of the inserted node is also red then we have a double red problem
+	There would be two cases when the parent of the inserted node is red node
+		case 2
+			The parent of b could also be red.In that case the double red problem moves up a level
+			Eventually we might color the root red
+			In this case we recolor the root black.This increases the black depth of every external node by 1
+ 	In both insertion and deletion we need to make at most one rotation
+ 	We might have to move up the tree but in doing so we recolor nodes
+ 	Time taken is O(logn)
+		

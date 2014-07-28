@@ -1,0 +1,9 @@
+DFS in undirected graph
+	DFS tree
+	Connected subgraph
+	Arrival times,departure times
+	DFS classifies every edge as tree edges,back edges (going back to vertex already visited)
+	Tree edges
+		An edge from node to parent
+	Back edges (Ancestor edges)
+		An edge from a node to ancestor

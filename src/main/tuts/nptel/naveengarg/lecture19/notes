@@ -1,0 +1,32 @@
+Data compression
+	File Compression
+		Text files are usually stored by representing each character with an 8-bit ASCII code
+		The ASCII encoding is an example of fixed length encoding where each character is represented with the same number of bits
+		In order to reduce the space required to store a text file we can exploit the fact that some characters are more likely to occure than others
+		Variable-Length Encoding
+			Uses binary codes of different lengths for different characters thus we can assign fewer bits to frequently used characters and more bits to rarely used characters
+		An encoding example
+			text : java
+			encoding a=0 j=11 v=10 ( Satisfies the prefix rule)
+			encoded text 110100
+		How to decode (problems in ambiguity)
+			encoding a = 0 j=01 v=00
+			encoded text 010000
+			could be java or jvv or jaaaa (Does not statisfy the prefix rule a is a prefix of code j and v)
+		To prevent ambiguities in decoding we require that encoding statisfies the prefix rule no code is a prefix of another
+		We use an encoding trie to satisfy this prefix rule
+			The characters are stored at the external node so there is no chance of code word being a prefix od another
+			A left child means 0
+			A right child means 1
+			To determine codeword for each character we trace the path from root to leaf
+		Optimal Compression
+			An issue with encoding tries is to ensure that the encoded text is as short as possible
+		Constructing algorithm
+			Given frequencies of characters we wish to compute a trie so that the length of the encoding is minimum possible
+			Each character is a leaf of the trie
+			The nunber of bits used to encode a character is its level number (root is 0)
+			Thus if fi is the frequency of the ith character and li is the level of the leaf corresponding to it then we want to find tree wich minimizes sigma(fili)
+			The quantity of sigma(fi,li) is called total external weighted path length of a tree
+			We view each leaf as having a weight equal to the frequency of the corresponding character
+			Given weights f1,f2,f3 ... we wish to find a tree whose weighted external path length is minimum
+			

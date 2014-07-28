@@ -1,0 +1,99 @@
+Graphs
+	A graph G = (V,E) is composed of
+		V: set of vertices
+		E: set of edges connecting the vertices V
+	An edge e = (u,v) is a pair of vertices
+	Two types of graphs directed , undirected graphs
+Applications
+	Circuits
+	Networks
+		- roads,flights,communications
+Graph terminology
+	Adjacent vertices
+		Vertices connected by an edge
+	Degree of a vertex
+		Number of adjacent vertices
+		E = (a,b) is incident to vertices a and b
+			Edge is incident on two vertices
+	Sum of all degrees of all vertices
+		Twice the number of edges since adjacent vertices each count the adjoining edge it will be counted twice
+	Path 
+		Sequence of vertices v1,v2,v3...vk such that consecutive vertices vi and vi+1 are adjacent
+	Simple path
+		No repeated vertices
+	Cycle
+		A simple path except that the last vertex is the same as the first vertex
+	Connected graph
+		Any two vertices are connected by some path
+	Subgraph
+		Subset of vertices and edges forming a graph
+	Connected component
+		Maximal connected subgraph
+	(free)Tree
+		Connect graph which have no cycles 
+	Forest
+		Collection of trees
+	Connectivity
+		Let n = #veritces amd m = #edges
+	Complete graph 
+		One in which all pairs of vertices are adjacent
+		There are n*n-1/2 edges nC2
+	For a tree m = n-1
+		A tree on n vertices has n-1 edges
+		Proof by induction	
+			n=2 no of edges m = 1
+			Induction hypothesis
+				Statement is tree for all n<= k
+			Consider a tree on k+1 vertices
+			A leaf is a vertex of degree 1
+			Every tree has a leaf
+	Minimum number of edges for graph to be connected is n-1
+	In a graph of n vertices and n-k edges then graph has k connected components when there are no cycle
+	Spanning tree
+		A spanning tree of G is a subgraph of a graph which is a tree and which contains all vertices of G
+		Failure on edge disconnects systems(least fault tolerant)
+	The Bridges of koenigsberg
+		Eulers problem
+		Multi-graph
+			There could be many edges between a pair of vertices
+		Eulerian Tour
+			Path that traverses every edge exactly once and returns to the first vertex
+		Euler's theorem 
+			A graph has a eulerian tour if and only if all vertices have even degree
+Graph ADT
+	The graph ADT is a positional container whose positions are the vertices and the edges of the graph
+	Size
+	isEmpty
+	elements
+	positions
+	swap
+	replaceElement
+	numVertices
+	numEdges
+	vertices - returns all vertices
+	edges - returns all edges
+	directed edges 
+	undirected edges
+	incidentEdges 
+	inIncidentEdges
+	outIncidentEdges
+	opposite(v,e)
+	degree
+	inDegree
+	outDegree
+	adjacentVertices
+	inAdjacentVertices
+	outAdjacentVertices
+	areAdjacent
+	endVertices
+	origin
+	destination
+	isDirected
+	makeUndirected
+	reverseDirection
+	setDirectionFrom
+	insertEdge
+	insertDirectedEdge
+	insertVertex
+	
+	

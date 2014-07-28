@@ -1,0 +1,38 @@
+Delete-Min
+	The minimum element is the one at the top of the heap
+	We can delete this and move one of its children up to fill the space
+	Empty location moves down the tree
+	Might end up at any position on the last level
+	Resulting tree would not be left filled
+	Replace top element with last element of heap and then apply heapify
+Building a heap
+	Correctness : induction on i trees rooted at m > i are heaps
+	Running time : n calls to heapify = n O(logn)
+	We can provide a better O(n) bound
+		Intuition for most of the time heapify works on smaller than n element heaps
+	Height of node : Length of longest path from node to leaf
+	Height of tree : height of root
+	Time for Heapify(i) = O(height of subtree rooted at i)
+	Assume n = pow(2,k)-1 ( A complete binary tree)
+	For the n/2 nodes of height 1 heapify requires at most 1 swap each
+	For the n/4 nodes of height 2 heapify requires at most 2 swaps each
+	For the n/pow(2,i) nodes of height i heapify requires at most i swaps each
+	So total number of swaps required is
+		T(n) = O((n+1/2) + (n+1/4*2) + ..... +1.K)
+			   O(n)
+	Sigma(pow(x,i)) = 1/1-x 
+	Differentiate
+		Sigma(i*pow(x,i-1)) = 1/pow(1-x,2)
+		Sigma(i*pow(x,i)) = x/pow(1-x,2)
+		Sigma(i,pow(2,i)) = (1/2)/(1/4) = 2
+Heap sort
+	Create a heap
+	Do delete-min repeatedly till heap becomes empty
+	To do an in place we move deleted element to end of the heap
+Times
+	Insert O(log n)
+	Heapify O(log n)
+	Find min O(1)
+	Delete-min O(logn)
+	Building a heap O(n)
+	Heap sort O(nlogn)

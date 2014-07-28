@@ -1,0 +1,76 @@
+More Sorting
+Radix Sort
+	Unlike other sorting methods radix sort considers the structure of keys
+	Assume keys are represented in base M number system M=radix i.e if M = 2 the keys are represented in binary
+	Sorting is done by comparing bits in same position
+	Extension to keys that are alphanumeric strings
+Radix Exchange Sort
+	Examine bits from left to right
+		Sort array with respect to leftmost bit
+		Partition array
+		Recursion
+			Recursively sort top subarray ignoring leftmost bit
+			Recursively sort bottom subarray ignoring leftmost bit
+		Time to sort n b-bit numbers O(b*n)
+			T(n,b) = T(i,b-1) + T(n-i,b-1)
+		algo for partition
+			repeat
+				scan top-down to find key starting with 1
+				scan bottom-up to find key starting with 0
+				exchange keys
+			until scan indices cross
+Radix exchange sort vs Quick sort
+	Similarities
+		both partition array
+		borh recursively sort sub-arrays
+	Differences
+		Method of partitioning
+			Radix exchange divides array based on greater than or less than pow(2,b-1)
+			Quicksort partitions based on greater than or less than some element of the array
+		Time Complexity
+			Radix exchange O(b*n)
+			Quick sort O(n*logn)
+Straight radix sort
+	Examine bits right to left (from least significant bit to most significant bit
+	for k=0 to b-1
+		sort the array in a stable way
+		looking only at bit k
+	In a stable sort the initial relative order of keys is unchanged 
+Correctness of algorithm
+	We show that any two keys are in the correct relative order at the end of the algorithms
+	Given two keys let k be the leftmost bit-position where they differ
+		01011
+		01101
+		  k
+	At step k the two keys are put in the correct relative order . Because of stability the successive steps do not change the relative order of the two keys
+Straight radix sort time complexity
+	for k=0 to b-1
+		sort the array in a stable way looking only at bit k
+	Suppose we can perform the stable sort above in O(n) time
+	Then the time complexity would be 
+		O(b*n)
+Bucket sort
+	n numbers
+	Each number which belongs to set 1,2,3,4 ... m
+	Stable sort
+	This is useful when the userinputs come from a small range
+	Time O(n+m)
+	First we create M buckets
+	Each element of the array is put in the one of the m buckets
+In place sorting
+	A sorting algorithm is said to be in place if
+		it uses no auxiliary data structures (however O(1) auxiliary variables are allowed)
+		It updates the input sequence only by means of operations replaceElement and swapElement
+	Bubble sort -  Y
+	Selection sort -  Y
+	Heap sort - Y
+	Merge sort - N
+	Quick sort - Y
+	Insertion sort - Y
+	Radix sort - 
+	Bucket sort - N
+Lower bound for comparison based sorting
+	internal node : comparison
+	external node : permutation
+	algorithm execution : root to leaf path
+	

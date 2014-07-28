@@ -1,0 +1,91 @@
+Scheduling
+	In a multi-user computer system , multiple users submit jobs to run on a single processor
+	We assume that the time required by each job is known in advance. Further jobs can be preempted
+	One policy which minimizes the average waiting  time is SRPT (Shortest Remaining Processing Time)
+	The processor schedules the job with the smallest remaining processing time
+	If while a job is running a new job arrives with processing time less than the remaining time of current job then the job is pre-empted
+Data structure SRPT
+	We need to maintain the remaining processing time of the unfinished jobs at any point of time
+	We need to find the job with the shortest remaining processing time
+	When a job finishes we should remove it from our collection
+	When a new job arrives we need to add to the collection
+Priority Queue
+	A priority queue is an ADT for maintaining a set S of elements each with an associated value called priority
+	A priority queue supports the following operations
+		Insert(X) 
+		Minimum() returns the smallest element of S with smallest priority
+		Delete-Min() returns and removes the elements of S with smallest priority
+Priorities and Total order relations
+	A priority queue ranks its elements by priority
+	Each element has a priorirty. Priorities are not necessarily unique and are totally ordered
+	Total order relations denoted by <=
+		Reflexive k<=k
+		Anti-Symmetric :- k1<=k2 && k2<=k1 then k1==k2
+		Transitive:- k1<=k2 && k2<=k3 then k1<=k3
+Comparators
+	The most general and reusable form of a priority queue makes use of comparator objects
+	Comparator objects are external to the keys that are to be compared and compare two objects
+	When the priority queue needs to compare two keys it uses the comparator it was given to do the comparison
+	Thus a priority queue can be general enough to store any object
+	The comparator ADT includes
+		isLessThan isLessThanEqualTo
+		isEqual
+		isGreaterThan isGreaterThanOrEqual
+		isComparable
+Implemented with Unsorted sequence
+	The items are pairs (priority , element)
+	Insert() - O(1)
+	However because we always insert at the end irrespective of the key value our sequence is not ordered
+	Thus for methods such as min or delete-min we need to look at all elements of s . The worst case complexity is O(n)
+Implemented with sorted sequence
+	Another implementation uses the sequence S sorted by increasing priorities
+	minimum() , delete-min() takes o(1) time
+	However to insert it takes O(n) time
+Applications of PQ
+	Job scheduling
+	Event simulation
+A heap can be used to implement PQ
+Binary heaps
+	A binary tree that stores priorities pairs at nodes
+	Structural property
+		All levels except last are full
+		Last level is left filled
+	Heap property
+		Priority of node is at least as large as that of its parent
+Finding the minimum element
+	The element with smallest priority always sits at the root of the heap
+	This is because if it was elsewhere it would have a parent with larger priority and this would violate the heap properrty
+	Hence minimum can be done in O(1) time
+Height of a heap
+	Suppose a heap of n nodes has height h
+	Since complete binary tree of height h has pow(2,h+1)-1 nodes
+	Hence pow(2,h)-1 < n <= pow(2,h+1)-1
+	h = floor(log(n))
+Implementing Heaps
+	We can implement heap using tree but it is much easier to handle heaps using an array
+	Parent(i)
+		return floor(i/2)
+	Left(i)
+		return 2*i
+	Right(i)
+		return (2*i+1)
+	Heap property 
+		A[parent(i)] <= A[i]
+	Notice the implicit tree links children of node i and 2i and 2i+1
+Correctness of insertion
+	The only nodes whose contents change are the ones on the path
+	Heap property may be violated only for children of these nodes
+	But new contents of these nodes only have lower priorit
+Heapify
+	i is index into the Array A
+	Binary trees rooted at Left(i) and Right(i) are heaps
+	But A[i] might be larger than its children thus violating the heap property
+	The method Heapify makes binary tree rooted at i a heap by moving A[i] down the heap
+Running time analysis
+	A heap of n nodes has height O(log n)
+	While inserting we might have to move the elements all the way to the top
+	Hence at most O(logn) steps required
+	In heapify the element might be moved all the way to the last level
+	Hence Heapify also requires O(logn) time 
+	
+	

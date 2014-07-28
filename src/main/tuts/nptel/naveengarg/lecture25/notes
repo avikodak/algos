@@ -1,0 +1,52 @@
+Data Structures of graphs
+	Edge list
+	Adjacency lists
+	Adjacency matrix  
+	A graph can be represented by storing the vertices and the edges into two containers and each edge object has references to the vertices it connects
+Edge list
+	The edge list structure simply stores the vertices and the edges in two unsorted sequences
+	Easy to implement
+	Finding the edges incident on a given vertex is inefficient since it requires examining the entire edge sequence
+Adjacency list(traditional)
+	adjacency list of a vertex v 
+		sequence of vertices adjacent to v
+	Represent the graph by adjacency list of all the vertices
+	Space O(N + Sigma(deg(v))) = O(N+M)
+Adjacency list(modern)
+	The adjacency list structure extends the edge list structure by adding adjacency list to each vertex
+Adjacency Matrix (traditional)
+	Matrix M with entries for all pairs of vertices
+	M[i,j] = true means that there is an edge (i,j) in the graph
+	M[i,j] = false means that there is no edge edge (i,j) in the graph
+	There is an entry for every possible edge therefore Space = O(n^2)
+Adjacency Matrix (modern)
+	The adjacency matrix structures augments the edge list structure with a matrix where each row and column corresponds to a vertex
+Graph Searching algortithm
+	Systematic search of every edge and vertex of the graph
+	Graph G = (V,E) is either directed or undirected 
+	Applications
+		Compilers
+		Graphics
+		Maze-solving
+		Mapping
+		Networks 
+			Routing,searching,clustering etc
+Breadth first search
+	A BFS traverses a connected component of a graph and in doing so defines a spanning tree with serveral useful properties
+	BFS in an undirected graph G is like wandering with a string 
+	The label of any vertex v corresponds to the length of the shortest path from s to v
+	Time Complexity
+		Given a graph G = (V,E)
+			Vertices are enqueued if there color is white
+			Assuming that en and dequeuing takes O(1) time the total cost of this operation is O(V)
+			Adjacency list of a vertex is scanned when the vertex is dequeued 
+			The sum of the lengths of all lists is O(E) 
+			Initializing the algorithm taks O(V)
+		Total running time O(V+E) (linear in the size of the adjacency list representation of G)
+BFS Properties
+	Given an undirected graph G = (V,E) BFS discovers all vertices reachable from a source vertex s
+	For each vertex v at level i the path of the BFS tree T between s and v has  at least i edges
+	If (u,v) is an edge then the level numbers of u and v differ by at most one
+	It computes the shortest distance to all reachable vertices
+	
+	

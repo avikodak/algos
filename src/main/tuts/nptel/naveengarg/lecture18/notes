@@ -1,0 +1,65 @@
+Text processing
+	In the KMP algorithm we process the pattern and so no matter what text comes it takes time proportional to length of the text which might be huge for static data
+	If the text is large, immutable and searched for ofter (e.g works by shakespeare) we may want to preprocess the text instead of pattern in order to perform pattern matching queries in time proportional to pattern lenght
+Standard tries
+	The standard trie for a set of strings S is an ordered tree such that
+		Each node but the root is labeled with a character
+		The children of a node are alphabetically ordered
+		The paths from external nodes to the root yield the strings of S
+	Running time of trie operations
+		A standard trie uses O(W) space
+		Operations (find,insert,remove) take time O(dm) each
+			W = total size of the strings in S
+			m = size of the string involved in operation
+			d = alphabet size
+	Applications of tries
+		A standard trie	supports the following operations on a preprocessed text in time O(m) 
+			Word matching : find the first occurence of word X in the text
+			Prefix matching : Find the first occurence of the longest prefix of word X in the text
+Compressed Tries
+	Trie with nodes of degree at least 2
+	Obtained from standard trie by compressing chains of redundant nodes
+	A tree in which every node has at least 2 children has atmost L-1 internal nodes where L is the number of leaves
+	The number of nodes in a compressed trie is O(s) where s= Sizeof(text)
+	The label in each node can be stored by using O(1) space index ranges at the nodes
+	
+Trie and web search engines
+	The index of a search engine is stored into a compressed trie
+	Each leaf of the trie is associated with a word and has a list of pages (URLs) containing tha word called occurence list
+	The tries is a kept in internal memory
+	The occurence lists are kept in external memory and are ranked by relevance
+	Boolean queries for sets of words correspond to set operations on occurence lists
+	Additional information retrieval techniques are used such as
+		Stopword ellimination (e.g ignore "the","a","is") 
+		Stemming (e.g identify "add","added","adding")
+		Link analysis (recognize authoriative pages)
+Tries and Internet Routers
+	Computers on the internet(hosts) are identified by a unique 32-bit IP address.
+	Data is sent to a host by fragmenting it into packets.Each packet carries the IP address of its destination
+	A router forwards packets to its neighbours using IP prefix matching users i.e it forwards the packets to longest prefix matching IP address
+Suffix tree
+	A suffix tree T for string S is a rooted directed tree whose edges are labelled with nonempty substrings of S
+	Each leaf corresponds to a suffix of S in the sense that the concatenation of the edge-labels on the unique path from root to the leaf splits out this suffix
+	Each internal node other than the root has atleast two children
+	No two out-edges of the node can have edge-labels with same first character
+	A suffix tree is essentially a compressed trie of all suffix
+	The suffix tree for a text X of size n from an alphabet of size d stores all the n suffixes of X is O(n) space
+	If two suffixes have a same prefix then their corresponding paths are the same at their beginning and the concatenation of the edge labels of the mutual part is the prefix
+	Not all strings guaranteed to have corresponding suffix trees
+	For example
+		Consider xabxa it does not have a suffix tree because here suffix xa is also a prefix of another suffix xabxa
+		Add $ a special termination character to the alphabet
+Building a suffix tree
+	The method starts from a single edge for suffix S[1...n] then it successively enters the edges for suffix S[i...n] into the growing tree for i increasing from 2 to n
+	Enter the edge for suffix S[i...n] into the tree as follows
+	Starting at the root find the longest path from the root whose label matches a prefix of S[i...n].At some point no further matches are possible
+		If this point is at a node then denote this node by w
+		If it is in the middle of an edge then insert a new node called w at this point
+	Create a new edge running from w to a new leaf labelled S[i...n]
+	The idea of the algorithm is that every occurence of P in T is a prefi of a suffix of T
+	Thus an occurence of P in T can be obtained as tha labels of edges along the path beginning concatenation of the root
+	Time Complexity
+		Preprocessing O(sizeof(text))
+		Searching O(sizeof(pattern) + k)
+			where k is the no of occurence of P in T
+	

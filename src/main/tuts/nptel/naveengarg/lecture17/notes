@@ -1,0 +1,27 @@
+Searching for patterns
+	Find all occurences of pattern P of length m inside text T of length n
+		Exact matching problems
+		Applications
+			Text editing
+			Term rewriting
+			Lexical analysis
+			Information retrieval
+			Bioinformatics
+		If m is the length of P and n is the length of T then 
+			Time complexity = O(m*n)
+			Space complexity = O(m+n)
+		When a mismatch is detected say at position k in the pattern string we have already successfully matched k-1 characters
+The Knuth-Morris-Pratt Algorithm
+	- Observation : When a mismatch occurs we may not need to restart the comparison all way back
+	- Constructing an array h, that determines how many characters to shift the pattern to the right in case of a mismatch during the pattern matching process
+	- The key idea is that if we have successfully matched the prefix P[1 ... i-1] of the pattern with the substring T[j-i+1 ... j-1] of the input string and
+	P(i) != T(j) then we do not need to reprocesss any of the suffix T[j-i+1 .. j-1] since we know this portion of the text string is the prefix of the pattern 
+	that we have just matched
+	- For each position i in the pattern P define hi to be the length of the longest proper suffix of P[1 .... i] that matches a prefix of P and P(hi+1) != P(i+1)
+	In any shift at most one comparison involves a character of T that was previously compared
+	After shift no character will be compared before unsuccesful position
+	#comparisons <= #shifts + sizeof(T) <= 2*sizeof(Text)
+	The KMP algorithm never needs to backtrack on the text string
+	Time complexity = O(m+n) preprocessing + searching
+	Space = O(m+n)
+			

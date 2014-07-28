@@ -1,0 +1,20 @@
+BFS Applications
+	No of connected components
+	Bipartite graph 
+Bipartite graph
+	G = (V,E) undireced graph is bipartite if there exists a partition of V into U and W V = U u W such that every edge has one end point in U and other end point in W
+	Examples
+		Jobs applicants
+	Do a BFS starting from a arbitrary vertex v
+	BFS divides the vertices into various levels
+	BFS divides all the edges of the graph which go adjacent levels or within a level . There wont be any edges which jump levels
+	Suppose all edges go between adjacent levels i.e no edge has both end points in the same level
+	If in the BFS we find an edge both of whose endpoints are in the same level then graph is not bipartite
+		if in the bfs we find an edge both of whose endpoints are in the same level then the graph has a odd cycle
+		if we have a odd cycle then the graph cannot be bipartite
+	If all cycles in a graph G are even then G is bipartite
+	O(V+M)
+In a BFS starting from vertex v the level number of the vertex u is the length of the shortest path from v to u
+Diameter(G) = Maximum distance between two vertices in G
+			  Distance between two vertices = length of the shortest path between two vertices
+			  Maximum level number <= Diameter(G) <= 2 * Maximum level number in any BFS
