@@ -1,0 +1,38 @@
+Comparison numbers
+	Case 1:
+		Number with greatest number of digits is greater
+	Case 2:
+		Number with greatest place value is greater
+Indian system
+	Ones
+	Tens
+	Hundreds
+	Thousands
+	Ten thousands
+	Lakhs
+	Ten lakhs
+	Crores
+	Ten crores
+Internation system
+	Ones
+	Tens
+	Hundreds
+	Thousand
+	Ten thousand
+	Hundred thousand
+	Million
+	Ten million
+	Hundred million
+	Billion
+	Ten Billion
+	Hundred billion
+Length
+	10 millimeters - 1 centimeter
+	100 centimeter - 1 meter
+	1000 meters - 1 kilo meter
+Weight
+	1000 gms - 1kgs
+Litres
+	1000 litres - 1 kilo litres
+Ramanujam Number 
+	1729 = pow(10,3)+pow(9,3) = pow(12,3) + pow(1,3)

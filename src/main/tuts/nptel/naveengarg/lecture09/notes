@@ -1,0 +1,32 @@
+Deletion in bst
+	Delete node x from a tree T
+	We can distinguish three cases
+		x has no children
+		x has only one child
+		x has both children
+	Deletion Case 1
+		If x has no children - just remove x
+	Deletion Case 2
+		If x has exactly one child,then to delete x, simply make p[x] point to that child
+	Deletion Case 3
+		If x has two children then to delete it we have to
+			Find its successor (or predecessor) 
+			Remove y 
+			Replace x with y
+	Worst case O(h)
+Inorder traversal 
+	This traversal gives sorted keys
+BST sort
+	We want to sort numbers {1,2,...n}
+	Total time taken to insert these numbers equals the sum of the level numbers of the nodes
+	Thus if numbers were inserted in ascending order we would get a tree of height n-1 which there is one node at each level
+	So total time for insertion 
+		1 + 2 + 3 + .... n-1 = n*(n+1)/2 = O(n^2)
+Inserting a random permutation
+	Suppose we take a random permutation of the keys and inserted then in this order
+	The total time required for insertion is now a random variable
+	We want to compute the expected value of the random variable
+	The expected value of the random variable is the average value it takes over a large number of trails
+	We will compute the average time takes to insert keys in the order specified by the n! permutations
+	In other words for each of the n! permutations we will compute the time taken to insert keys in that order and then compute the average
+	Let T(n) denote this quantity

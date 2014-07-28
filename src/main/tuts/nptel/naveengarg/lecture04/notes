@@ -1,0 +1,86 @@
+Dictionaries ADT
+	It is an ADT which stores elements such that it can be located very quickly using keys
+	A dictionary stores key element pairs
+	The main operation supported by dictionary is searching by key
+	Simple container methods
+		size
+		isempty
+	Query Methods
+		findElement(k)
+		findAllElement(k)
+	Update Methods
+		insertElement(key,element)
+		removeElement(key)
+		removeAllElement(key)
+Unordered dictionary
+	Keys are comparable only for equality ie we cannot say whether K1 > K2 or K1 < K2 .
+	Doesnt support min,max,predecessor,successor
+Dictionary ADT can be implemented
+	Array
+	Linked list
+	Hashtable
+	Binary Trees
+	Red black trees
+	AVL trees
+	B-Trees
+Searching
+	returns index of the key if present or nill
+	Linear search
+		Traverse the entire array
+		Execution time O(N)
+	Binary Search
+		Divide and conquer strategy
+		Only on sorted array
+		Execution time O(LogN)
+In an unsorted array the search takes
+	Worst case O(N)
+	Average case O(N)
+Unsorted sequence
+	Searching & removing O(N)
+	Inserting O(N)
+	Used in logfiles,SystemAdministration (rare search / remove but insertion are very frequent)
+Sorted sequence
+	Seaching - O(logn)
+	Insertion & Removal - O(N)
+	Used in application where there are frequent searches but rare removals and insertions
+Direct Addressing
+	Takes O(1) time
+	Huge amount of space
+	Space O(r) - for complete range 
+Hashing
+	Excepted time = O(1)
+	Space O(n+m)
+	Like an array but come with the function to map the large range into one which we can manage
+		Ex : Take the original key modulo the size of the array and use that as an index
+	Collision
+		If two keys maps to same location
+	Collision Resolution Techniques
+		Use chaining
+Analysis of hashing
+	An element with key K is stored at index h(k)
+	The hash function h maps the Universe U of keys into the slots of hash table T[0 .. m-1]
+		h:U->T[0 .. m-1]
+	Time to compute hash function for k h(k) is O(1)
+	A good function is one which distributes keys evenly amongst the slots
+	An ideal hash function would pick a slot uniformly at random and hash the key to it
+	However this is not a hash function since we would not know which slot to look into when searching for key
+	Given hash table T with m slots holding n elements the load factor of the hash map is defined as alpha = n/m			
+Unsuccessful search 
+	Element is not in the linked list
+	Simple hashing yields an average list length alpha = n/m
+	Expected number of elements to be examined is alpha
+	Search time O(1+alpha)
+Successful search
+	Assume that the new element is inserted at the end of the linked list
+	Upon insertion of the ith-element the expected length of sill (i-1)/m
+	In case of a successful search the expected number of elements examined is one more than the number of elements examined when sought for element is searched
+	(1/n)Sigma(1ton)(1+(i-1)/m))
+Assuming the number of hash map slots is proportional to the number of elements in the table
+	n =O(m)
+	alpha = n/m = O(m)/m = 1
+	Searching takes constant time 
+	Insertion = O(1)
+	Deletion = O(1)
+		
+	
+		

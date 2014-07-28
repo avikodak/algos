@@ -164,6 +164,122 @@ int getNumberOccuringOddNumberOfTimesONLOGNBST(vector<int> userInput){
 	return result == null?INT_MAX:result->value;
 }
 
+void oRotateNodes(ifavltNode *parent,ifavltNode *child){
+	if(parent == null || child == null){
+		return;
+	}
+	ifavltNode *grandParent = parent->parent;
+	child->parent = grandParent;
+	if(grandParent != null){
+		if(grandParent->left == parent){
+			grandParent->left = child;
+		}else{
+			grandParent->right = child;
+		}
+	}
+	parent->parent = child;
+	ifavltNode *temp;
+	if(parent->left == child){
+		temp = child->right;
+		parent->left = temp;
+		child->right = parent;
+		if(temp != null){
+			temp->parent = parent;
+		}
+	}else{
+		temp = child->left;
+		parent->right = temp;
+		child->left = parent;
+		if(temp != null){
+			temp->parent = parent;
+		}
+	}
+}
+
+ifavltNode *insertAtRightPlaceOdd(ifavltNode **root,ifavltNode *currentNode,int userInput){
+	if(*root == null){
+		*root = new ifavltNode(userInput);
+		return null;
+	}else{
+		if(currentNode->value == userInput){
+			currentNode->frequency += 1;
+			return null;
+		}
+		if(currentNode->value > userInput){
+			if(currentNode->left == null){
+				currentNode->left = new ifavltNode(userInput);
+				currentNode->left->parent = currentNode;
+				return currentNode;
+			}else{
+				return insertAtRightPlaceOdd(root,currentNode->left,userInput);
+			}
+		}else{
+			if(currentNode->right == null){
+				currentNode->right = new ifavltNode(userInput);
+				currentNode->right->parent  = currentNode;
+				return currentNode;
+			}else{
+				return insertAtRightPlaceOdd(root,currentNode->right,userInput);
+			}
+		}
+	}
+}
+
+void insertNodeIntoAvlTree(ifavltNode **root,int userInput){
+	ifavltNode *ptrToInsertedNode = insertAtRightPlaceOdd(root,*root,userInput);
+	if(ptrToInsertedNode == null){
+		return;
+	}
+	ifavltNode *z,*y,*x;
+	z = ptrToInsertedNode;
+	int leftHeight,rightHeight;
+	while(z != null){
+		leftHeight = z->left == null?0:z->left->height;
+		rightHeight = z->right == null?0:z->right->height;
+		if(abs(leftHeight-rightHeight) > 1	){
+			y = z->value > userInput?z->left:z->right;
+			x = y->value > userInput?y->left:y->right;
+			if((z->left == y && y->left == x)|| (z->right == y && y->right == x)){
+				oRotateNodes(z,y);
+				z->height = max(z->left == null?0:z->left->height,z->right == null?0:z->right->height) + 1;
+				y->height = max(y->left == null?0:y->left->height,y->right == null?0:y->right->height) + 1;
+			}else{
+				oRotateNodes(y,x);
+				oRotateNodes(z,x);
+				y->height = max(y->left == null?0:y->left->height,y->right == null?0:y->right->height) + 1;
+				z->height = max(z->left == null?0:z->left->height,z->right == null?0:z->right->height) + 1;
+				x->height = max(x->left == null?0:x->left->height,x->right == null?0:x->right->height) + 1;
+			}
+			return;
+		}
+		z->height = max(leftHeight,rightHeight)+1;
+		z = z->parent;
+	}
+}
+
+int getOddManOutInorder(ifavltNode *ptr){
+	if(ptr == null){
+		return INT_MIN;
+	}
+	int leftResult = getOddManOutInorder(ptr->left);
+	if(leftResult != INT_MIN){
+		return leftResult;
+	}
+	return getOddManOutInorder(ptr->right);
+}
+
+int oddNumberTimesAVLTree(vector<int> userInput){
+	if(userInput.size() == 0){
+		return INT_MIN;
+	}
+	ifavltNode *root = null;
+	for(unsigned int counter = 0;counter < userInput.size();counter++){
+		insertNodeIntoAvlTree(&root,userInput[counter]);
+	}
+	return getOddManOutInorder(root);
+}
+
+
 /****************************************************************************************************************************************************/
 /* 																O(N^2) Algorithm 																    */
 /****************************************************************************************************************************************************/

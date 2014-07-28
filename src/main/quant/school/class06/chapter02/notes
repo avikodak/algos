@@ -1,0 +1,43 @@
+Whole numbers
+	N = {1,2,3,4,5...}
+	Every natural number has a predecessor expect for 1
+	When we add zero to natual numbers the set becomes Whole numbers
+	Evert whole number can be represented on the number line
+	Number which occur on the right side of the number line is greater than number which is on left side
+	All natural numbers are whole numbers
+	All whole numbers have successor 
+	All whole numbers except for zero have predecessor
+Addition 
+	This corresponds to moving right on the number line
+Subtraction
+	This corresponds to moving left on the number line
+Multiplication 
+	This corresponds to making jumps of equal distances from zero
+	Repeated addition
+Division 
+	This corresponds to number of equal steps taken from a number for the given number to reach to zero
+	Division by zero is not defined because we wont be able to reach to zero 
+	Repeated division
+Addition & Multiplication
+	When two whole numbers are added we get a whole numbers
+	for example 2 + 3
+	When two whole numbers are multiplied we again get a whole numbers
+	So we can say that whole numbers are closed under addition and multiplication
+Subtraction & Division
+	Subtraction or division of whole numbers will not result in an whole numbers
+	So as a result whole numbers are not closed under subtraction and division
+	for example 2-3 or 2/3
+Commutativity of whole numbers
+	a + b = b + a
+	i.e we can add two whole numbers in any order
+	a * b = b * a
+	i.e we can multiply any two whole numbers in any order
+Associative property
+	(a + b) + c = a + (b + c)
+	(a * b) * c = a * (b * c)
+Identity
+	When we add 0 to any whole numbers we get same old whole number again
+		So 0 is the additive identity for whole numbers
+	When we multiply 1 to any whole numbers we get back the same old whole number again
+		So 1 is multiplicative identity for whole numbers
+

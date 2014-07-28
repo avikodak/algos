@@ -1,0 +1,82 @@
+Abstract data type
+	ADT is a mathematically specified entity that defines a set of its instances with
+		A specific interface - a collection of signatures of operations that can be invoked on an instance
+		A set of axioms that define the semantics of the operations (i.e what the operations do to instance of the ADT but not how)
+		Hides the implementation details
+		To talk at the higher level (like sum we can talk stack push pop operation)
+		They serve as specifications of requirements for the building blocks of solutions to algorithmic problems
+		Provides a language to talk on a higher level of abstraction
+		ADTs encapsulate data structures and algorithms that implement them
+		Separate the issues of correctness and efficiency
+		
+	Axioms:
+		Describe how the functions behave - Behaviour / Functionalty of operations
+		
+	ADT provides the specification of the data structures and operations that can operate on the ds without going into the implementation details	
+		
+	Types of operations
+		Constructors
+		Access Methods
+		Manipulation procedures
+	
+Dynamic set
+	Operation
+		New
+		Insert
+		Delete
+		IsIn
+		
+Stack
+	Collection of elements which follows LIFO - Last In first out
+	Objects can be inserted at any time but only the last object can be removed
+	Inserting an item is known as "Pushing" onto the stack , "Popping" off the stack is synonymous with removing the last item
+	PEZ dispenser , Stack of trays 
+	
+	Operations
+		New - Create a new stack
+		Push - Insert an element into the stack
+		Pop - if empty should flag an error // Remove an element from the stack
+		Top - if empty should flag an error // Get the last element inserted into the stack
+	Support Methods
+		Size - Returns number of elements on the stack
+		isEmpty - Indicates if stack is empty
+		
+	Given the stack ADT , we need to code the ADT in order to use it in programs for that we need two importantn programming constructs : interfaces and exceptions
+	An interface is a way to declare what a class is to do.It does not mention how to do it
+		For an interface we just write down the method names and the parameters(only types will be sufficient)
+		Later when we write a class for that interface we actually code the content of the methods
+		Separating interface and implementation is a useful programming technique
+		
+Exceptions
+	Exceptions are yet another programming construct useful for handling errors.When we find an error (or an exceptional case) we just throw an exception
+	As soon as the exception is thrown the flow of control exits from the current method and goes to where the method was called from
+	We can delegate upwards the responsibility of handling an error.Delegating upwards means letting the code who called the current code to deal with the problem
+	Exceptions are nothing but they are just the class
+	Note that if somewhere in the method you throw an exception you need to add a throws clause next to your method name
+	If you never catch an exception it will propagate upwards and upwards along the chain of method calls untill user sees it
+	Method can throw multiple exceptions
+	Method can catch multiple exceptions in the try catch block
+
+
+	Stacks can be implementated using arrays
+		The array implementation is simple and efficient (O(1) time)
+		There is an upper bound , N on the size of the stack the arbitraty value N may be too small for a given application or a waste of memory
+		
+	StackEmptyException is required by the interface
+	StackFullException is a particular to the array implementation ie if the array size is infinite this exception would have never occured
+	
+Span
+ 	The span of a stock's price on a certain day i is the maximum number of consecutive days (up to current day) the price of the stock has been less than or equal to
+ 	price on day i
+ 	
+Growable array based stack
+	Instead of giving up with a stackfullexception we can replace array S with larger size  and continue with push operations
+	When ever the stack is full we increment the size of the array by some function
+	Depending on the function we have two strategies
+		Tight strategy : Increment the size of the stack by constant
+		Growth strategy : Increment the size by the doubling the size of the stack
+		
+		Tight Vs Growth strategy
+		To compare two strategies we use the following cost model
+		 	A regular push takes O(1) time
+		 	A special push opertion takes more time  = time to create array + copy elements of array from one to another + time taken to push the new element

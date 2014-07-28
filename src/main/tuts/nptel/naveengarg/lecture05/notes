@@ -1,0 +1,77 @@
+Hash functions
+	Quick to compute
+	Distributes keys uniformly throughout the table
+	Good hash functions are rare
+	No matter what hash functions we use we get collisions
+	Before using the hash function we should convert the non integer keys to integer keys
+	Mapping of keys to indices of a hash table is called hash function
+	A hash function usually is a composition of hash code map and a compression map
+		An essential requirement of the hash function is to map equal keys to equal indices\
+		A "Good" hash function minimizes the probability of collisions
+		Hashcode Map : Key -> Integer
+		Compression Map : integer -> [0,N-1]
+Hash code map
+	"Integer cast" for numeric types with 32 bits or less , we can interpret the bits of the number as an int
+	"Component Sum" for numeric types with more than 32 bits we add it in chunks of 32 bits
+	But the above two hash code maps are very inefficient as there would be more number of collisions
+	Polynomial accumulation for strings of natural language , combine the character values (ASCII or Unicode) a0,a1,a2...an-1 by viewing them  as the coefficients of polynomials
+		a0 + x*a1 + pow(x,2)*a2+ .... + pow(x,n-1) * an-1 
+	The choice of x = 33,37,39,41 gives at most 6 collision for 50k english words
+Compression map
+	Use the remainder
+		h(k) = k mod m , k is the key , m is the size of the hash table
+		Need to choose m
+		m = pow of any number is bad
+			if m is a power of 2 gives the e least significant bits of k
+			all keys ending with same last least significant bits end up mapping to same key
+		m = prime 
+			helps ensure uniform distribution
+			primes not too close to powers of because it leads to above case
+		
+		2) h(k) = floor(m(key * A mod 1))
+				A is a constant between 0 and 1
+		   The steps involved are
+		   		Map 0...kmax into 0...KmaxA
+		   		take the fractional part (mod 1)
+		   		map it to 0...m-1
+		The choose of m is not critical 
+		Optimal choice of  A depends on the characteristics of the data
+		Knuth proposes value of A = (sqrt(5)-1)/2 Fibonnaci hashing
+		3) MAD (Multiply , Add , Divide)
+			h(k)  = abs(A*Key + B) mod M
+				 M - Size 
+				 A,B - Constants
+				 A should not be multiple of M
+				 This formulae is used in linear congruential random number generators
+Universal hashing
+	For any choice of hash functions there are always a bad set of identifiers
+	A malicious adversary could choose keys to be hashed such that all go into the same slot
+	Average retrieval time will be O(N)
+	Solution
+		A random hash function
+		Choose hash function independent of keys
+		Create a set of hash functions H , from which h can be randomly selected
+	A collection H of hash functions is universal if for any randomly chosen f from H (and two keys k and l)
+		Pr(f(k)=f(l)}=1/m
+Open addressing
+	Collision resoultions
+	In chaining none of the keys are actually stored in the table they are stored outside the table. In the table we had only reference but in open addressing all the elements are stored in the table
+	so as a result the no of elements to be inserted should be less than the m  ( n < m).This is not a requirement in chaining
+	Each element of the table either contains element or null
+	When searching for an element we have to systematically probe for table slots
+	
+	Linear probing
+		
+	Double Hashing
+
+
+				 
+		
+		   		
+	
+	
+	
+	
+	
+
+			

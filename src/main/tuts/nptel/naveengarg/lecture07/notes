@@ -1,0 +1,39 @@
+Tree walks/traversals	
+	A tree walk or traversal is a way of visiting all the nodes in a tree in a specified order
+	A preorder tree walk processes the node before processing its children
+	A postorder tree walk processes each node after processing its children
+Preorder traversal
+	Algo preOrder(v)
+		visit node v
+		for each child w of v
+			preOrder(w)
+	Ex
+		Reading a book
+Postorder traversal
+	Algo postOrder(v)
+		for each child w of v
+			postOrder(w)
+		visit node v
+	Ex
+		Directory space size 
+			du (disk usuage) size of the tree
+	Arithematic expressions
+Inorder traversal
+	When v is visited between the visits to the left and right subtree
+	Algo inorder(v)
+		inorder(v.left)
+		visit
+		inorder(v.right)
+Euler traversal
+	if(external)
+		visit
+		return;
+	visit(v)
+	Eulertraversal(v.left)
+	visit(v)
+	EulerTraversal(v.right)
+Given pre and post order traversal of a binary tree we cannot uniquely identify the tree
+This is because there can be two trees with same post and pre order traversals
+Special case
+	If each internal node of the internal node of the binary tree has at least two children then the tree can be determined from the pre and post order traversals
+	

@@ -1,0 +1,108 @@
+Queue
+	A queue differs from stack in thats its insertion and removal routines. 
+	Queue follows LIFO
+	Elements may be inserted at any time but the elements which have waited for longer time will be removed first
+	Elements are inserted on the rear end and removed from the front
+	
+	Queue support 3 fundamental methods
+		New() creates a new queue - Constructor method
+		Enqueue()  inserts an elements to the queue to the rear - Manipulation method
+		Dequeue() removes an element from the front of the queue - Manipulation method
+		Front() only gets the front element of the queue - Accessor methods
+		
+		Support methods
+		Size(),isEmpty(),isFull() (Implementation specific)
+		
+		An array implementation
+		 The queue consists of the N-elements array Q and two integer variables
+		 	f , index of the front element (head for dequeue)
+		 	r , index of the element "AFTER" the rear one 
+		 	f = r means that both queue is full or empty so we atmost insert N-1 values into the queue
+		 	
+	Implementing queue with linked lists
+		Nodes(data,pointer) connected in a chain by links
+		The head of the list is the front of the queue,the tail of the list is the rear of the queue
+
+Double ended queue
+	A double-ended queue or deque supports insertion and deletion from the front and back
+	This supports 6 fundamental methods
+		New
+		InsertFirst
+		InsertLast
+		RemoveFirst
+		RemoveLast
+		First
+		Last
+		Size
+		isEmpty
+	Double ended queue can be implemented usign DLL optimised way
+		Deletions at the tail of a singly linked list cannot be done in constant time
+		A node of a dll  has a next and a prev link
+		When implementing a dll we add two special nodes to the end of the lists : the header and trailer nodes
+			The header node goes before the first list element .It has a valid next link but a null prev link
+			The trailer node goes after the last element . It has valid prev ptr but a null next reference
+			The header and trailer nodes are Sentinal Nodes/Dummy nodes because they do not store any value
+		
+The Adaptor Pattern
+	Using a deque we can implement stack and queue is an example of adaptor pattern
+	Adaptor patterns implement a class using the methods of an another class
+	Adaptor classes specialize general classes
+
+Circular lists
+	No end and no beginning of the list , only one entry point
+	Circular doubly linked list with  a sentinal is an elegant implementation of a stack and queue		
+	
+Vector ADT
+	Vector is a data structures where each element is associated with a rank
+	Vector supports some fundamental methods like
+		new
+		elementAtRankR - Returns the element in S with rank r Error if r < 0 or r > n-1
+		replaceAtRankR - replaces the elemet in S with rank r .........................
+		insertAtRankR  - inserts the element in S at rank r	...........................
+		removeAtRankR  - removes the element from S at rank r ..........................
+		
+	If vector is implemented using arrays
+		elementAtRankR - O(1)
+		replaceAtRankR - O(1)
+		insertAtRankR  - O(N)
+		removeAtRankR  - O(N)
+		
+	If vector is implemented using dll
+		elementAtRankR - O(N)
+		replaceAtRankR - O(N)
+		insertAtRankR  - O(N)
+		removeAtRankR  - O(N)
+
+	Linked lists support efficient execution of node based operations
+		removeAtNode(node)
+		insertAfterNode(node)
+		However node based operations are not meaningful in array based implementation because there no nodes in array
+
+Position ADT
+	Intuitive notion of "place" of an element
+	Support only one fundamental method
+		element() - Returns the element at position
+	Positions are defined relative to other positions
+	Positions are not tied to an element or rank
+	
+List ADT
+	Generic methods  size,isempty
+	query methods isFirst,isLast
+	accessor methods first,last,before(position),after(position)
+	update methods
+		swapelement(p,q)
+		replaceelement(p,q)
+		insertfirst(e)
+		insertlast(e)
+		insertbefore(p,e)
+		insertafter(p,e)
+		remove(p)
+	Each of the above methods will take O(1) time if implemented in dll
+
+Sequence ADT
+	Combines the vector and list ADT
+	Has methods of both vector and position
+	Also has additional methods like
+		atRank(r) returns the position 
+		rankOf(P) returns the rank of the position
+		

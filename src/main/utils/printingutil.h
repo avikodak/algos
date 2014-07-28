@@ -72,6 +72,23 @@ void printIVector(vector<int> userInput,bool withHeadersAndFooters = true){
 	}
 }
 
+//Tested
+void printUIVector(vector<unsigned int> userInput,bool withHeadersAndFooters = true){
+	if(withHeadersAndFooters){
+		printf("\n====================================================================================================================================\n");
+		printf("PRINTING VECTOR START\n");
+		printf("====================================================================================================================================\n");
+	}
+	for(unsigned int counter = 0;counter < userInput.size();counter++){
+		printf("%u\t",userInput[counter]);
+	}
+	if(withHeadersAndFooters){
+		printf("\n====================================================================================================================================\n");
+		printf("PRINTING VECTOR END\n");
+		printf("====================================================================================================================================\n");
+	}
+}
+
 void printITVector(vector<itNode *> userInput,bool withHeadersAndFooters = true){
 	if(withHeadersAndFooters){
 		printf("\n====================================================================================================================================\n");
@@ -131,6 +148,26 @@ void printReverseITNodeStack(stack<itNode *> auxSpace,bool withHeadersAndFooters
 	}else{
 		printf("\n");
 	}
+}
+
+//Tested
+void printUIUIHashMap(hash_map<unsigned int,unsigned int> map,bool withHeadersAndFooters = true){
+	if(withHeadersAndFooters){
+			printf("\n====================================================================================================================================\n");
+			printf("PRINTING HASH MAP START\n");
+			printf("====================================================================================================================================\n");
+		}
+		hash_map<unsigned int,unsigned int>::iterator itToMap;
+		for(itToMap = map.begin();itToMap != map.end();itToMap++){
+			printf("%u\t%u\n",itToMap->first,itToMap->second);
+		}
+		if(withHeadersAndFooters){
+			printf("\n====================================================================================================================================\n");
+			printf("PRINTING HASH MAP END\n");
+			printf("====================================================================================================================================\n");
+		}else{
+			printf("\n");
+		}
 }
 
 #endif /* PRINTINGUTIL_H_ */

@@ -1,0 +1,73 @@
+Basic geometry
+	A point is almost invisible tiny dot
+	Points are represented by upper case letters
+	A point determines a location
+Line segment 
+	A line segment is formed by joining two points.
+	It has fixed length
+	It is the smallest distance between any two points 
+	AB(bar)
+Line
+	A line segment in which both ends are extended beyond the end points
+	Lines are usually denoted by lower case letters
+	We can draw infinite lines through a point in a plane
+Ray
+	A ray is a part of a line.It begins at a point and goes on endlessly in a specified direction
+	Sunrays or torch
+Curve 
+	Any figure drawn without 
+	A line or outline which gradually deviates from being straight for some or all of its length
+	Straight line is also a curve in mathematics
+Closed curve
+	Two endpoints of the curve meet
+Simple curve
+	A curve which doesnt cross itself
+Polygon
+	A polygon is a simple closed figure made up of definite number of line segments
+	Boundary wall of a park divides the plane into three parts i.e. inside the park,the park boundary and outside the park
+	A closed figure separates the plane into 3 parts
+		Interior of the figure 
+		Boundary of the figure
+		Exterior of the figure
+	Region = Interior + Boundary
+Angle
+	When two rays meet at a common end point then an angle is formed
+	The two rays forming an angle are called arms or sides of the angle
+	The common end point is called vertex of the angle
+	Angle divides the plane into 3 parts
+		Interior :- bounded by two sides of the angle
+		Exterior :- Outside of the two sides of the angle
+Triangle
+	The simple closed figure formed by three line segments
+	The line segments which form triangle are called sides of the triangle
+	The end points of the triangle are called vertices of the triangle
+	There are three interior angles for a triangles 
+	Triangle is a first polygon
+	The triangle divides the plane into three regions
+		Interior of the triangle
+		Boundary of the triangle
+		Exterior of the triangle
+Quadilateral
+	A quadilateral is a simple closed figure formed with four line segments
+	Quadilateral has 4 line segments , 4 angles , 2 diameters
+	A diameter is a line segments which joins opposite vertices in a quadilateral
+	Like triangle quadilateral divides the plane into three regions
+		Exterior , Interior , Boundary
+Circle
+	A circle is a simple shape of Euclidean geometry that is the set of all points in a plane that are at a given distance from a given point, the centre
+	The point in the midle is the center
+	The length of the curve edge is called circumference
+	Distance between center to any point on the circle is called radius
+	A line segment joining two points in the circumference on the circle is called chord
+	A chord passing through the center of the circle is called diameter of the circle
+	Diameter is the longest chord
+	Length of diameter = 2 * radius of the circle
+	The part of the circle is called arc
+	The region in the interior of a circle enclosed by the boundary is called circular region
+	Region enclosed by an arc and two radii is called sector of the circle
+		Minor sector
+		Major sector
+	Region enclosed by an arc and a chord is called segment of the circle 
+		Minor segment
+		Major segment
+	Region enclosed by an arc and a diameter is a semi circular region

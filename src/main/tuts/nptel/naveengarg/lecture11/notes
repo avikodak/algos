@@ -1,0 +1,58 @@
+AVL Trees
+	AVL trees are balanced
+	An AVL Tree is a binary search tree is a binary search tree such that for every internal node v of T the heights of the children of v can differ by atmost by 1
+Height of an AVL Tree
+	Proposition 
+		The height of an AVL tree T storing n keys is O(logn)
+	Justification
+		The easiest way to approach above proposition is to find n(h) : The minimum number of nodes in an AVL tree of height h
+		We see that n(1) = 1 and n(2) = 2
+		For h >= 3 , an AVL tree of height h contains the root node , one AVL subtree of heoght h-1 and the other AVL subtree of height h-1 or h-2
+		so n(h) = 1 + n(h-1) + n(h-2)
+		Knowing n(h-1) >= n(h-2) we get
+			n(h) = n(h-1) + n(h-2) + 1 > 2n(h-2)
+			n(h) > 2n(h-2)
+				 > 4n(h-4)
+				 > pow(2,i) * n(h-2*i)
+			When i = h/2 - 1 we get n(h) > pow(2,h/2-1)*n(2) = pow(2,h/2)
+			Taking logs
+				h < 2*log(n(h))
+			Thus the height of the AVL tree is O(logn)\
+		We will show how to obtain a sharper bound on the height of an AVL ree
+		We prove using induction that the minimum number of nodes in an AVL Tree of height h , n(h) >= pow(c,h-1) where c is some number > 1
+			Base case h=1 n(h) = 1
+			Suppose claim is true for all h < k
+			n(k) = n(k-1) + n(k-2) + 1
+				 >= n(k-1) + n(k-2)
+				 >= pow(c,k-1) + pow(c,k-2)
+			We will be able to show that n(k) >= pow(c,k) if we can show that pow(c,k-1) + pow(c,k-2) >= pow(c,k)
+			So c should be such that pow(c,2)-c-1 <= 0
+			The quadratic equation has roots (1-sqrt(5))/2 and (1+sqrt(5))/2
+			Hence we can take c as (1 + sqrt(5))/2 = 1.63
+	 		n(h) >= pow(1.63,h-1)
+	 		h <= log(n)tobase1.63
+	 		
+Structure of an AVL tree
+	Consider an AVL tree on n nodes
+	Consider a leaf which is closest to the root
+	Suppose this leaf is at level k
+	Then the height of the tree is atmost 2k-1
+	Claim : Since closest leaf is at level k all nodes at levels 1...k-2 have 2 children
+		Check for height balance property
+	All levels 1 to k-1 are full
+	Hence the tree has at least pow(2,k-1) nodes
+	Since height of tree is at most 2k-1 it has atmost pow(2,2k-1)
+	So	pow(2,k-1) <= n <= pow(2,2k-1)
+	Substituting h for 2k-1 we get
+	pow(2,(h-1)/2)<=n<=pow(2,h)
+	So it has exponential no of nodes	
+Summary
+	In an AVL tree of height h the leaf closest to the root is at level is atleast (h+1)/2
+	On the first h-1/2 levels the AVL tree is a complete binary tree 
+	Number of nodes in the AVL tree is atleast pow(2,(h-1)/2) <= n <= pow(2,h)
+	After (h-1)/2 levels the AVL tree may start thinning out
+Insertion
+	A binary tree T is called height-balanced if for every node v, height of v's children differ by atmost 1
+	
+	
+				

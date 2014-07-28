@@ -1,0 +1,22 @@
+Insertion in an AVL tree
+	Inserting a node v into an AVL tree changes the heights of some of the nodes in tree T
+	The only nodes whose heights can increase are the ancestors of the node v
+	If insertion causes T to become unbalanced then some ancestors of v would have height imbalance
+	We travel up the tree from v untill we find the first node x hat its grandparent z is unbalanced
+	To rebalance the subtree rooted at z , we must perform a rotation
+	Rotation is a way of locally reorganizing a BST
+	Single rotation
+	Double rotation	
+Deletion 	
+	When deleting a node in a BST , we neither delete a leaf or a node with only one child
+	If in an AVL tree a node has one child then its child is a leaf node
+	Hence in an AVL tree we either delete a leaf or the parent of a leaf
+	Hence deletion can be assumed to be at a leaf
+	Let z be the first unbalanced node encountered while travelling up the tree from w . Also let y be the child of z with larger height , and let x be the child of y with larger height
+Insertion
+	We perform rotation only once but might have to go to O(logn) levels to find the unbalanced node
+	So time for insertion is O(logn)
+Deletion
+	We need O(logn) time to delete a node
+	Rebalancing also requires O(logn) time
+	More than one rotation may have to be performed

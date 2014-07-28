@@ -1,0 +1,55 @@
+Quick sort
+	Sorts almost in place i.e does not require an additional memory
+	Very practical,average sort performance O(nLogN) with small constant factors,but worst case O(n^2)
+	This algorithms follows divide and conquer strategy
+	A divide and conquer algorithm consists of 
+		Divide 
+			partition array into 2 subarrays such that elements in the lower part <= elements in the higher part
+		Conquer 
+			recursively sort the 2 subarrays
+		Combine
+			trivial since sorting is done in place 	
+	For quick sort
+		Partitioning 
+			It is done aroung pivot element
+			It is a linear time partitioning procedure
+		Linear procedure
+		The running time depends on the distribution of splits ie how many elements end up in left part and how many elements end up in right part
+		If at every point we divide the array into two equal halves
+			T(n) = 2*T(n/2) + O(n) - Best case
+			T(n) = T(1)+T(n-1) + O(n) - Worst case
+		If we take the last element as pivot the worst case appear when
+			input is sorted
+			input is reverse sorted
+		Same recurrence for the worst case of insertion sort
+		However sorted input yields the best case for insertion sort
+	Suppose the split is 1/10 : 9/10
+		T(n) = T(n/10) + T(9n/10) + O(n) = O(nlogn)
+		If the constant amount of fraction of elements go on one side then the complexity of the quick sort will still remain O(nLogN)
+	Suppose we alternate lucky and unlucky cases to get an average behaviour
+		L(n) = 2U(n/2) + O(n)
+		U(n) = L(n-1) + O(n)
+		we consequently get
+		L(n) = 2(L(n/2-1)+O(n/2)+O(n))
+			 = 2L(n/2-1) + O(n)
+			 = O(nlogn)
+	If we partition the array using the median element then we can divide the array into two equal halves
+	
+Randomized quicksort
+	Assume all elements are distinct
+	Partition around a random element
+	Consequently all splits (1:n-1,1:n-2 ... n-1:1,1:n) are equally likely with probability 1/n
+	Randomization is a general tool to improve algorithms with bad worst case but good average case complexity
+	Let T(n) be the expected number of comparisons needed to quick sort n numbers
+	Since each split occurs with probability 1/n , T(n) has value T(i-1) + T(n-i) + n-1 with probability 1/n 
+	Hence
+		T(n) = (1/n)(SigmaFrom1ToN(T(j-1) + T(n - j) + n-1)
+			 = (2/n)(SigmaFrom0ToN-1(T(j)) + n-1
+	It is the recurrence for the expected number of comparisons required to insert a randomly chosen permutation of n elements
+	We proved that T(n) = O(nlogn)
+	Hence expected number of comparisons required by randomized quicksort is O(nlogn)
+	Worst case running time of quicksort is O(n^2)
+	Best case running time of quicksort is O(nlogn)
+	Excepted running time of quicksort is O(nlogn)
+	The running time of the quicksort does not depend on input.It depends on the random numbers provided by the generator
+	

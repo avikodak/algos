@@ -1,0 +1,144 @@
+Algorithm:
+	Its a step by step procedure of solving a problem
+	It describes actions on input sequence 
+	
+Program:
+	Implementation of algorithm
+	
+Data structure:
+	Organization of the data associated with the problem so that it can be used effectively by a program. 
+	DS can lead to faster execution of the program
+
+Algorithmic problem:
+	Some specified Input -> To produce some output
+	
+Input instance:
+	The input which satisfies the specification
+	
+Efficient algorithm:
+	Small running time + less memory
+	Memory is considered on very small devices like smart watch etc .. 
+	
+Experimental study:
+	Procedure:
+		Implement the different algorithm
+		Clock the time by using the system utils for different algos
+		The algorithm which takes least amount of time is the best algo
+	Cons:
+		It essentially forces user to implement the algorithm which is a huge overhead
+		We cannot clock time for each and every input because there might be infinetly large number of instances which satisfy given constraints
+		Running time depends on hardware and software environments ( all the programs should be run on same system with same software environment)
+
+General Methodology:
+	Which gives 
+		High level description of algorithm
+		Takes in account of all inputs
+		Independent of hardware and software environments
+		No implementation required
+		
+Pseudo code:
+	High level description of the algos
+	Syntax is not a concern
+	Its more structured than usual prose but less formal than a programming language
+	Text book def : 
+		A mixture of natural lang and high level programming concepts that describes the main ideas behind generic implementation of a ds
+		
+	Expressions
+		Uses standard mathematical symbols
+		<- for assignment (=) 
+		= for equality(==)	
+		Method declaration : 
+			algorithm name(param1,param2)
+		Programming constructs
+			Decision constructs : if then else
+			while-loop : while , do .. while
+			for loop: for .. do
+			array indexing : A[i],A[i][j]
+
+Analysis of algorithm
+	Primitive operations:low level system operations independent of the programming language
+		Data movement (assign)
+		Control (branch,subroutine call,return)
+		Arithmetic and logical operations 
+	We count the total number of primitive operations in the pseudo code and then express the time taken
+	
+	Example:
+		Sorting:
+			A given set of numbers should be converted to increasing/decreasing order of the given inputs
+			Correctness:
+				Should be in increasing or decreasing order
+				Should be a subset of given inputs
+			Running time depends on:
+				Number of given integers
+				Relative sorted
+				Algorithm
+
+	Best cast: Min time taken
+		Provides lower bound
+		
+	Worst case : Max time taken by algo
+		Most interested
+		Provides an upper bound
+		
+	Avg case : Avg time taken by algo
+	
+	Insertion sort:
+		Best case : O(N)
+		Worst case : O(N^2)
+		Avg Case : O(N^2)
+
+Asymptotic Analysis
+	Goal : To simplify analysis of running time by getting rid of details, which may be affected by the specific implementation and hardware
+	Capturing the essence of how the running time of an algorithm increases/decreases with the size of the input in the limit
+	
+Notation:
+	The big-Oh notation
+		provides upper bound
+		f(n)=O(g(n)) if there exists constants c and n0 such that f(n)<= cg(n) for n>= n0
+		f(n) and g(n) are functions for non negative integers
+		used for worst case analysis
+	Simple rule for knowing the BigOh function
+		Drop all constants
+		Drop all lower order terms
+		It is expected that the approximation should be as small an order as possible
+	
+	Use O-Notation to express the primitive operation executed as the function of input size
+	Then compare the asymptotic running times
+		An algorithm that runs in O(n) time is better than that runs on O(n2) time
+	However we should remember the fact very large constants may give the wrong asymptotic relation within the limit
+		10^6n < 2n^2
+		
+Special class of algorithms complexity
+	Logarithmic = O(logn)
+	Linear = O(n)
+	Quadratic = O(n^2)
+	Polynomial = O(n^k) k >= 1
+	Exponential = O(K^n) k >= 1
+		n = input size
+
+	Big Omega
+		Asymptotic lower bound
+		provides lower bound
+		f(n) = BigOmega(n) if there exists constants c and n0 such that cg(n) <= f(n) for n>=n0
+		Used to describe the best case running times of lower bounds of algorithmic problems
+		Ex : Lower bound of searching in an unsorted array is BigOmega(n)
+	
+	Big Theta
+		Aymptotically tight bound
+		f(n)=BigTheta(g(n)) if there exists constants c1,c2 and n0
+		such that c1*g(n) <= f(n) <= c2*g(n) for n >= n0
+		
+	Little-Oh notation f(n) =o(g(n)) non-tight analogue of Big-Oh
+		For every c,there should exists n0 such that f(n)<=c(g(n)) for n>= n0
+		Used for comparisons of running times if f(n)=o(g(n)) it is said that g(n) dominates f(n)
+	
+	Little-Omega is non tight analogue of Big-Omega
+	
+	Analogy with real numbers
+		f(n) = O(g(n)) == f<=g
+		f(n) = o(g(n)) == f<g
+		f(n) = BigOmega(g(n)) == f>=g
+		f(n) = LittleOmega(g(n)) == f>g
+		f(n) = BigTheta(g(n)) = f=g
+	
+	

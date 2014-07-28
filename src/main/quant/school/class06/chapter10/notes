@@ -1,0 +1,16 @@
+Perimeter and area
+	The length of the boundary of a closed figure is called its perimeter
+	Perimeter is the distance covered along the boundary forming a closed figure
+	Perimeter of rectangle = 2 * (length + breadth)
+Regular polygon 
+	Polygons are simple closed figures bounded by line segments
+	A polygon is called a regular polygon if all is sides are of equal length and all angles are of equal measure
+	Perimeter of square = 4 * length of side
+	Perimeter of equilateral triangle = 2 *length of side
+Regular shapes
+	Geometrical shapes that have all the sides equal and all angles equal are called regular shapes
+Area
+	The amount of surface enclosed by closed figure is called its area
+	Area of rectangle = length * breadth
+	Area of square = pow(side,2)
+	The area of square is more than the area of rectangle having the same perimeter

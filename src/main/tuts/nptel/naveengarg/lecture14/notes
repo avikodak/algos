@@ -1,0 +1,42 @@
+Red black trees
+	A red black tree is a binary search tree in which each node is colored red or black
+	The root is colored black
+	A red node can have only black children
+	If a node of the BST does not have a left and/or right child we add an external node
+	External nodes are not colored
+	The black depth of an external node is defined as the number of black ancestors it has
+	In a red black tree every external node has the same black depth
+Two prolems
+Double red problem
+	Two reds occuring consecutively
+Black height not uniform
+Height of a red-black tree
+	Let h be the black height of a red black tree on n nodes
+	n is smallest when all the nodes are black . In this case tree is a complete binary tree of height h and n=pow(2,h)-1
+	n is largest when all the alternate levels of tree are red then height of tree is 2h and n = pow(2,2h)-1;
+	log4(n) < h < 1+log2(n)
+Redblack trees to 2-4 trees
+	Any red-black tree can be converted into 2-4 tree
+	Take a black node and its red children(atmost 2) and combine them into one node of a 2-4 tree
+	Each node so formed has atleast 1 and atmost 3 keys
+	Since black height of all external nodes is same,in the resulting 2-4 tree all leaves are at same level
+2-4 trees to Red-black trees
+	Any 2-4 tree can be converted into a red-black tree
+	We replace a node of the 2-4 tree with one black node and 0/1/2 red nodes which are children of the black node
+	The height of the 2-4 tree is the black height of the red-black tree created
+	Every red node has a black child
+Deletion
+	To delete a node we proceed as in BST ie we search for the node first
+	The node which is deleted is the parent of an external node
+	Hence it is either a leaf or the parent of the leaf
+	There might be 3 scenerios
+		The node to be deleted is a leaf red node
+		The node to be deleted might be a leaf black node
+		The node could be a black node with left red only child
+			The red cannot have black children because the right child is a external node and there would a black height problems
+		Case tricky
+			when the leaf node is a black node
+			Removing this reduces black depth of an external node by 1
+			Hence in a general step we consider how to reorganize the tree when the black height of some subtree goes down from h to h-1
+						
+	

@@ -1,0 +1,53 @@
+Ordered Dictionary
+	In addition to dictionary functionality (Search for an element) it also supports
+		Min
+		Max
+		Predecessor(S,k)
+		Successor(S,k)
+	For this we require that there should be a total order on the keys
+	In normal dictionary the only operation which we can perform is to check for equality but in ordered dictionary the supported operations are <,>,>=,<=,min,max etc
+A list based implementation
+Unordered list
+	Searching takes O(n) time
+	Inserting takes O(1) time
+Ordered list
+	Searching takes O(n) time
+	Inserting takes O(n) time
+Binary Search Tree (BST)
+	BST is a binary tree T such that
+		Each internal node stores an item(k,e) of a dictionary
+		Keys stored at nodes in the left subtree of v are less than or equal to k
+		Keys stored at nodes in the right subtree of v are greater than or equal to k
+	Searching in BST
+		To find an element with key K in a tre T
+			compare k with key[root[t]]
+			if k < key[root[t]],search for k in left[root[t]]
+			otherwise search for k in right[root[t]]
+		Running time on tree of height h is O(h)
+		After the insertion of n keys the worst case running time of searching is O(n)
+	Minimum value in bst
+		TreeMinimum(x)
+			while(left[x] != null)
+				do x <- left[x]
+			return x
+		Running time O(h) it is proportional to height of tree
+		TreeMaximum(x)
+			go to right untill the right child is null
+		Successor
+			Given x find the node with smallest key greater than key[x]
+			Case 1
+				right subtree of x is non empty
+				successor is leftmost node in the right subtree
+			Case 2
+				right subtree of x is empty
+				Successor is the lowest ancestors of x whose left child is also an ancestors of x
+			For a tree of height h , the running time is O(h)
+	Insertion in bst
+		The basic idea is similar to searching
+			take an element z (whose left and right children are NIL) and insert into T
+			Find place in T where z belonfs 
+			Add z there
+		The running time for insertion in bst of height h is O(h) i.e it is proportional to the height of the tree
+		If we insert the keys in sorted order either ascending / decending then the height of the tree will be O(n)
+		The height of the tree will depend on the order of the keys given which can vary from O(logN) to O(n)
+		

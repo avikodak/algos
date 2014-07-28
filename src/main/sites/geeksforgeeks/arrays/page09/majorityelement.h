@@ -200,6 +200,107 @@ int majorityElementONLOGNBST(vector<int> userInput){
 	return maxiftNode->frequency > userInput.size()/2?maxiftNode->value:INT_MAX;
 }
 
+void rotateNodes(ifavltNode *parent,ifavltNode *child){
+	if(parent == null || child == null){
+		return;
+	}
+	ifavltNode *grandParent = parent->parent;
+	if(grandParent != null){
+		if(grandParent->left == parent){
+			grandParent->left = child;
+		}else{
+			grandParent->right = child;
+		}
+	}
+	child->parent = grandParent;
+	parent->parent = parent;
+	ifavltNode *temp;
+	if(parent->left == child){
+		temp = child->right;
+		child->right = parent->left;
+		parent->left = temp;
+		if(temp != null){
+			temp->parent = parent;
+		}
+	}else{
+		temp = child->left;
+		child->left = parent->right;
+		parent->right = temp;
+		if(temp != null){
+			temp->parent = parent;
+		}
+	}
+}
+
+ifavltNode *insertValueAtRightPlace(ifavltNode **root,ifavltNode *currentNode,int value){
+	if(*root == null){
+		*root = new ifavltNode(value);
+		return null;
+	}else{
+		if(currentNode->value == value){
+			currentNode->frequency += 1;
+			return null;
+		}else{
+			if(currentNode->value > value){
+				if(currentNode->left == null){
+					currentNode->left = new ifavltNode(value);
+					currentNode->left->parent = currentNode;
+					return currentNode;
+				}else{
+					return insertValueAtRightPlace(root,currentNode->left,value);
+				}
+			}else{
+				if(currentNode->right == null){
+					currentNode->right = new ifavltNode(value);
+					currentNode->right->parent = currentNode;
+					return currentNode;
+				}else{
+					return insertValueAtRightPlace(root,currentNode->right,value);
+				}
+			}
+		}
+	}
+}
+
+void setHeightForNode(ifavltNode *ptr){
+	if(ptr == null){
+		return;
+	}
+	ptr->height = max(ptr->left == null?0:ptr->left->height,ptr->right == null?0:ptr->right->height) + 1;
+}
+
+void insertIntoAvlTree(ifavltNode **root,int userInput){
+	ifavltNode *ptrToInsertedValue = insertValueAtRightPlace(root,*root,userInput);
+	if(ptrToInsertedValue == null){
+		return;
+	}
+	ifavltNode *z,*y,*x;
+	z = ptrToInsertedValue;
+	int leftHeight,rightHeight;
+	while(z != null){
+		leftHeight = ptrToInsertedValue->left == null?0:ptrToInsertedValue->left->height;
+		rightHeight = ptrToInsertedValue->right == null?0:ptrToInsertedValue->right->height;
+		if(abs(leftHeight - rightHeight) > 1){
+			y = z->value > userInput?z->left:z->right;
+			x = y->value > userInput?y->left:y->right;
+			if((z->left == y && y->left == x)||(z->right == y && y->right == x)){
+				rotateNodes(z,y);
+				setHeightForNode(z);
+				setHeightForNode(y);
+			}else{
+				rotateNodes(y,x);
+				rotateNodes(z,x);
+				setHeightForNode(y);
+				setHeightForNode(z);
+				setHeightForNode(x);
+			}
+			return;
+		}
+		z->height = max(leftHeight,rightHeight) + 1;
+		z = z->parent;
+	}
+}
+
 /****************************************************************************************************************************************************/
 /* 																O(N^2) Algorithm 																    */
 /****************************************************************************************************************************************************/

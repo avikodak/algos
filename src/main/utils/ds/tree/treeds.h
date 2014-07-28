@@ -144,6 +144,44 @@ struct iftNode{
 	}
 };
 
+struct cftNode{
+	char ch;
+	unsigned int frequency;
+	cftNode *left;
+	cftNode *right;
+
+	cftNode(){
+
+	}
+
+	cftNode(char userInput){
+		ch = userInput;
+		frequency = 1;
+		left = null;
+		right = null;
+	}
+};
+
+struct ifptNode{
+	int value;
+	unsigned int frequency;
+	ifptNode *left;
+	ifptNode *right;
+	ifptNode *parent;
+
+	ifptNode(){
+
+	}
+
+	ifptNode(int value){
+		this->value = value;
+		frequency = 1;
+		left = null;
+		right = null;
+		parent = null;
+	}
+};
+
 struct iltNode{
 	int value;
 	unsigned int level;
@@ -159,6 +197,146 @@ struct iltNode{
 		left =  null;
 		right = null;
 		level = 0;
+	}
+};
+
+struct iavltNode{
+	int value;
+	unsigned int height;
+	iavltNode *left;
+	iavltNode *parent;
+	iavltNode *right;
+
+	iavltNode(){
+
+	}
+
+	iavltNode(int value){
+		this->value = value;
+		height = 1;
+		left = null;
+		parent = null;
+		right = null;
+	}
+};
+
+struct ifavltNode{
+	int value;
+	unsigned int height;
+	unsigned int frequency;
+	ifavltNode *left;
+	ifavltNode *parent;
+	ifavltNode *right;
+
+	ifavltNode(){
+
+	}
+
+	ifavltNode(int value){
+		this->value = value;
+		height = 1;
+		frequency = 1;
+		left = null;
+		right = null;
+		parent = null;
+	}
+};
+
+struct cfavltNode{
+	char ch;
+	unsigned int frequency;
+	unsigned int height;
+	cfavltNode *parent;
+	cfavltNode *left;
+	cfavltNode *right;
+
+	cfavltNode(){
+
+	}
+
+	cfavltNode(char userInput){
+		ch = userInput;
+		frequency = 1;
+		height = 1;
+		parent = null;
+		left = null;
+		right = null;
+	}
+};
+
+struct iRedBlackNode{
+	int value;
+	bool isRedNode;
+	iRedBlackNode *left;
+	iRedBlackNode *right;
+	iRedBlackNode *parent;
+
+	iRedBlackNode(){
+
+	}
+
+	iRedBlackNode(int value){
+		this->value = value;
+		isRedNode = true;
+		left = null;
+		right = null;
+		parent = null;
+	}
+};
+
+struct ifRedBlackNode{
+	int value;
+	unsigned int frequency;
+	bool isRedNode;
+	ifRedBlackNode *left;
+	ifRedBlackNode *right;
+	ifRedBlackNode *parent;
+
+	ifRedBlackNode(){
+
+	}
+
+	ifRedBlackNode(int value){
+		this->value = value;
+		this->frequency = 1;
+		isRedNode = true;
+		left = null;
+		right = null;
+		parent = null;
+	}
+};
+
+struct ctrieNode{
+	char ch;
+	unsigned int noOfChildren;
+	ctrieNode *parent;
+	ctrieNode *children[26];
+
+	ctrieNode(){
+
+	}
+
+	ctrieNode(char userInput){
+		ch = userInput;
+		noOfChildren = 0;
+		parent = null;
+	}
+};
+
+struct i24Node{
+	int values[3];
+	unsigned int fillCount;
+	i24Node *parent;
+	i24Node *children[4];
+
+	i24Node(){
+		fillCount = 0;
+	}
+
+	i24Node(int value){
+		this->values[0] = value;
+		fillCount = 1;
+		parent = null;
 	}
 };
 

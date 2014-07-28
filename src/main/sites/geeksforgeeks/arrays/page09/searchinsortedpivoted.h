@@ -147,7 +147,7 @@ unsigned int searchForValueInSortedPivotArrayByFindingPivot(vector<int> userInpu
 	return UINT_MAX;
 }
 
-//Works only for unqiue values
+//Works only for unique values
 unsigned int searchForValueInSortedPivorArrayOLOGN(vector<int> userInput,int key,unsigned int startIndex,unsigned int endIndex){
 	if(startIndex > endIndex||userInput.size() == 0){
 		return UINT_MAX;

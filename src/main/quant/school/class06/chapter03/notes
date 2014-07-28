@@ -1,0 +1,48 @@
+Divisibility rule
+	We say that the number is completely divisible by another number when it leaves zero as remainder
+	The process of checking whether a number is divisible by a given number without the actual division is called divisibility rule of the number
+Divisibility by 2
+	We say that the number is divisible by 2 if the by number has 0,2,4,6,8 in the units digit
+Divisibility by 3
+	Number is divisible by 3 if sum of digits is divisible by 3
+Divisibility by 4
+	Number is divisible by 4 if last two digits is divisible by 4
+Divisibility by 5
+	Number is divisible by 5 if digit is either 0 or 5
+Divisibility by 6
+	Number is divisible by 6 if it is divisible by 2 or 3
+Divisibility by 8	
+	Number is divisible by 8 if last three digits is divisible by 8
+Divisibility by 9
+	Number is divisible by 9 if sum of digits is divisible by 9
+Divisibility by 10
+	Number is divisible by 10 if units digits in the number is 0
+Divisibility by 11
+	Number is divisible by 11 if difference of sum of digits at odd place and sum od digits in even place is divisible by 11
+	In general a number is divisible by a number if it is divisible by its coprime
+Factor
+	A number is said to be a factor of other numbers it is divides the other number exactly i.e without leaving remainder
+Prime number
+	A number is called prime number if it has exactly 2 numbers as its factor
+	The smallest of all factors of a given number is 1
+	The greatest factor for any given number is a number itself
+Composite number
+	A number is said to be composite it has more than 2 factors
+	
+	1 is neither prime or composite because it has only 1 factor
+Co-prime/Relatively prime
+	We say that two numbers are co-prime if they have 1 as the only common factor
+	Co-prime numbers need not be prime numbers for example 4 and 5
+Sieve of eratostthenes
+	Fastest way of generating the prime numbers
+Twin primes
+	Twin primes are prime numbers that differ from each other  by two e.g. (3,5) (5,7) (11,13) (17,19)
+Prime factorization
+	When a number is expressed as a product of its factors , we say that the number has been factorized.The process of finding factors is called factorization
+	When all the factors are prime numbers is known as prime factorization
+Highest Common Factor / Greatest common divisor (H.C.F / G.C.D)
+	HCF of two or more given numbers is the highest of all the common factors.
+Least common multiple (L.C.M)
+	The lcm of two or more given numbers is the lowest of their common multiples
+	If one of the two given numbers is a mupltiple of the other,then the greater number is the LCM of the given numbers
+	

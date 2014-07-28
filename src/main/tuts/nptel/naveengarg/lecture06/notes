@@ -1,0 +1,90 @@
+Tree
+	Definitions
+		Root
+		Node 
+		Parent
+		Great grand parent
+		Siblings
+		Ancestors
+		Descendants
+		Leaves
+		Children
+		External Nodes
+		Internal Nodes
+	Depth/Level of a Node
+	Height of a tree 
+		Max depth of the nodes
+	Usuage
+		A tree represents a hierarchy for 
+		Examples 
+			The organization structure of an corporation
+			Table of contents of book
+			File systems
+	Ordered Tree 
+		It is a tree in which children of each node are ordered
+	Binary tree
+		Ordered tree with all nodes having at most 2 children
+	Recursive definition of binary tree
+		A binary tree is either a 
+			leaf
+			internal node (the root) and one/two binary trees (left subtree and/or right subtree)
+		Ex	
+			Arithematic Expressions
+			Decision trees 
+	Complete Binary Tree
+		Level i has pow(2,i) nodes
+		In a tree of height h
+			Leaves are at level h
+			No of leaves in pow(2,h)
+			No of internal nodes = pow(2,h) - 1
+			No of internal nodes = no of leaves -1
+			Total no of nodes pow(2,h+1)-1 = n
+		In a tree of n nodes
+			No of leaves is (n+1)/2
+			Height = log(no of leaves)
+		No of leaves is very large 
+	A binary tree can be obtained from an appropriate complete binary tree by pruning
+	A binary tree of height h has 
+		At most pow(2,i) nodes at level i
+		At most 1 + 2 + pow(2,2) + pow(2,3) + ... + pow(2,h) = pow(2,h+1)-1 nodes
+	If a tree has n nodes then
+		n <= pow(2,h+1)-1
+		h >= log((n+1)/2)
+	A binary tree on n nodes has height at most n-1 which is obtained when every node has exactly one child
+		log((n+1)/2) <= h <= n-1
+	No of leaves <= 1+no of internal nodes	
+	For a binary tree on n nodes
+		no of leaves + no of internal nodes = n
+		no of leaves <= no of internal nodes + 1
+		no of leaves <= (n+1)/2
+		Minimum no of leaves is 1
+ADTs for Trees
+	Generic container methods
+		size
+		isEmpty
+		elements - Gives all values
+	Positional container methods
+		positions - Gives all positions of tree 
+		swapElements - Swapping two positions
+		replaceElement
+	Query methods
+		isRoot
+		isInternal
+		isExternal
+	Accessor methods
+		root() : returns the position of the root
+		parent(p) returs parent of the node
+		children(p) returs children of the node
+	Binary Tree
+		leftChild(p)
+		rightChild(p)
+		siblings(p_
+	Each node in the tree contains
+		key - key
+		left - pointer to left child
+		right - ptr to right child
+		parent - ptr to parent node
+Unbounded Tree
+	Parent 
+	Leftchild
+	RightSiblings

@@ -150,6 +150,97 @@ int *getPairOfNodesForGivenSumONLOGNBST(vector<int> userInput,int requiredSum){
 	return null;
 }
 
+void rotateIFAvlTNode(ifavltNode **root,ifavltNode *parent,ifavltNode *child){
+	if(parent == null || child == null){
+		return;
+	}
+	ifavltNode *grandParent = parent->parent;
+	if(grandParent != null){
+		if(grandParent->left == parent){
+			if(grandParent->left == parent){
+				grandParent->left = child;
+			}else{
+				grandParent->right = child;
+			}
+		}else{
+			(*root) = child;
+		}
+	}
+	parent->parent = child;
+	child->parent = grandParent;
+	ifavltNode *temp = null;
+	if(parent->left == child){
+		temp = child->right;
+		child->right = parent;
+		parent->left = temp;
+	}else{
+		temp = child->left;
+		child->left = parent;
+		parent->right = temp;
+	}
+	if(temp != null){
+		temp->parent = parent;
+	}
+}
+
+ifavltNode *insertAtRightPlace(ifavltNode **root,ifavltNode *currentNode,int userInput){
+	if(*root == null){
+		(*root) = new ifavltNode(userInput);
+		return null;
+	}else{
+		if(currentNode->value == userInput){
+			currentNode->frequency += 1;
+			return null;
+		}
+		if(currentNode->value > userInput){
+			if(currentNode->left == null){
+				currentNode->left = new ifavltNode(userInput);
+				return currentNode->left;
+			}else{
+				return insertAtRightPlace(root,currentNode->left,userInput);
+			}
+		}else{
+			if(currentNode->right == null){
+				currentNode->right = new ifavltNode(userInput);
+				return currentNode->right;
+			}else{
+				return insertAtRightPlace(root,currentNode->right,userInput);
+			}
+		}
+	}
+}
+
+void insertIntoFAVLTree(ifavltNode **root,int userInput){
+	ifavltNode *ptrToInsertedNode = insertAtRightPlace(root,*root,userInput);
+	if(ptrToInsertedNode == null){
+		return;
+	}
+	ifavltNode *z = ptrToInsertedNode,*y,*x;
+	int leftHeight,rightHeight;
+	while(z != null){
+		leftHeight = z->left == null?0:z->left->height;
+		rightHeight = z->right == null?0:z->right->height;
+		if(abs(leftHeight-rightHeight) > 1){
+			y = z->value > userInput?z->left:z->right;
+			x = y->value > userInput?y->left:y->right;
+			if((z->left == y && y->left == x)||(z->right == y && y->right == x)){
+				rotateIFAvlTNode(root,z,y);
+				z->height = max(z->left == null?0:z->left->height,z->right == null?0:z->right->height) + 1;
+				y->height = max(y->left == null?0:y->left->height,y->right == null?0:y->right->height) + 1;
+			}else{
+				rotateIFAvlTNode(root,y,x);
+				rotateIFAvlTNode(root,z,x);
+				z->height = max(z->left == null?0:z->left->height,z->right == null?0:z->right->height) + 1;
+				y->height = max(y->left == null?0:y->left->height,y->right == null?0:y->right->height) + 1;
+				x->height = max(x->left == null?0:x->left->height,x->right == null?0:x->right->height) + 1;
+			}
+			return;
+		}
+		z->height = max(leftHeight,rightHeight) + 1;
+		z = z->parent;
+	}
+}
+
 /****************************************************************************************************************************************************/
 /* 																O(N^2) Algorithm 																    */
 /****************************************************************************************************************************************************/
